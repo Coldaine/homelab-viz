@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EPYC Rome SP3 · 512 GB RAM Configurator · 2026-09-07</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="mast">
+  <div class="mast-row">
+    <div>
+      <h1>EPYC Rome SP3 · 512 GB memory paths</h1>
+      <p class="sub">DIY vs chassis vs dual-socket · live asks retrieved <time id="stamp" datetime="2026-09-07T01:52:32Z">2026-09-07 01:52 UTC</time> · sources stamped · Patrick PPP</p>
+    </div>
+    <div class="mast-badges">
+      <span class="badge ask">ASK</span>
+      <span class="badge sold">SOLD</span>
+      <span class="badge conf-hi">HIGH</span>
+      <span class="badge conf-med">MED</span>
+    </div>
+  </div>
+</header>
+
+<section class="callout warn" id="finding-2933">
+  <strong>2933 often worse value than 2666.</strong>
+  DIMMsum medians today: 64GB 2933 <em>$11.25/GB</em> vs 2666 <em>$7.94/GB</em> (+42%);
+  32GB 2933 <em>$10.22/GB</em> vs 2666 <em>$5.58/GB</em> (+83%).
+  ~10% more MT/s for a much larger $/GB premium. Prefer 2666 (or cheapest grade at/above platform ceiling).
+</section>
+
+<section class="callout info" id="finding-3200">
+  <strong>3200 vs slower (bandwidth, not stick size).</strong>
+  DDR4-3200 is the speed tier that actually moves bandwidth vs 2666/2400/2933 (~20% more MT/s than 2666).
+  Cost today: 64GB 3200 median <em>$12.80/GB</em> vs 2666 <em>$7.94/GB</em> (+61%); 32GB 3200 <em>$12.37/GB</em> vs 2666 <em>$5.58/GB</em> (+122%).
+  Rome SP3 ceilings vary by CPU/population; faster sticks downclock. Buy 3200 only if the platform holds 3200 <em>and</em> the $/GB premium is worth the bandwidth.
+</section>
+
+<nav class="paths">
+  <button type="button" class="path-tab active" data-path="A">Path A · 8-DIMM DIY<br><small>8×64 only · ROMED8 / H12SSL</small></button>
+  <button type="button" class="path-tab" data-path="B">Path B · 16-DIMM 1S chassis<br><small>16×32 · R6515 / R7515 class</small></button>
+  <button type="button" class="path-tab" data-path="C">Path C · Dual-socket step-up<br><small>2× non-P · optional, not for 16×32</small></button>
+</nav>
+
+<main class="grid">
+  <!-- CONTROLS -->
+  <aside class="panel controls">
+    <h2>Configurator</h2>
+    <label>Active path
+      <select id="pathSel">
+        <option value="A">A · 8-DIMM DIY (8×64)</option>
+        <option value="B">B · 16-DIMM single-socket (16×32)</option>
+        <option value="C">C · Dual-socket step-up</option>
+      </select>
+    </label>
+    <label>Speed grade (MT/s)
+      <select id="speedSel">
+        <option value="2400">2400</option>
+        <option value="2666" selected>2666</option>
+        <option value="2933">2933</option>
+        <option value="3200">3200</option>
+      </select>
+    </label>
+    <label>Price basis
+      <select id="basisSel">
+        <option value="median" selected>DIMMsum median $/GB</option>
+        <option value="cheap">Cheapest live stick × count</option>
+      </select>
+    </label>
+    <div class="path-note" id="pathNote"></div>
+    <div class="totals" id="totals"></div>
+    <p class="fine">RAM totals for 512 GB. Board/CPU added below. Quiet case/PSU = +unknown.</p>
+  </aside>
+
+  <!-- SPEED LADDER -->
+  <section class="panel">
+    <h2>Speed ladder · 512 GB · $/GB and total</h2>
+    <p class="fine">Same capacity, four grades. <strong>2933</strong> called out as poor value. <strong>3200</strong> is the bandwidth step vs everything slower.</p>
+    <div class="table-wrap">
+      <table class="matrix" id="ladderTable">
+        <thead>
+          <tr>
+            <th>Path / pop</th>
+            <th>2400</th>
+            <th>2666</th>
+            <th class="bad">2933</th>
+            <th class="hi">3200</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="legend">
+      <span class="pill bad">2933 · worse $/GB</span>
+      <span class="pill hi">3200 · bandwidth tier</span>
+      <span class="pill">ask · DIMMsum median unless noted</span>
+    </div>
+  </section>
+
+  <!-- PATH DETAIL -->
+  <section class="panel span2" id="pathDetail">
+    <h2 id="pathTitle">Path A · 8-DIMM DIY</h2>
+    <div id="pathBody"></div>
+  </section>
+
+  <!-- LIVE LISTINGS -->
+  <section class="panel span2">
+    <h2>Live listing cards <span class="badge ask">ASK</span></h2>
+    <p class="fine">Opened URLs · not invented. Marked ask vs sold where known.</p>
+    <div class="cards" id="listingCards"></div>
+  </section>
+
+  <!-- COMPARISON MATRIX -->
+  <section class="panel span2">
+    <h2>Comparison matrix · sample builds @ 2666 median</h2>
+    <div class="table-wrap">
+      <table class="matrix" id="buildMatrix">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Path A · 8×64 DIY</th>
+            <th>Path B · 16×32 1S</th>
+            <th>Path C · Dual + A RAM</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Population</th>
+            <td>8×64 GB</td>
+            <td>16×32 GB</td>
+            <td>8×64 (or more on 16-slot dual)</td>
+          </tr>
+          <tr>
+            <th>Board class</th>
+            <td>ROMED8-2T / H12SSL-i (8 DIMM)</td>
+            <td>Dell R6515 / R7515 class (16 DIMM, 1S)</td>
+            <td>H12DSi-N6 / H11DSi (dual SP3)</td>
+          </tr>
+          <tr>
+            <th>CPU</th>
+            <td>7402P OK (1P only)</td>
+            <td>7402P OK (1P only)</td>
+            <td><strong>7402 non-P ×2</strong> (7402P will not dual)</td>
+          </tr>
+          <tr>
+            <th>RAM @2666 median</th>
+            <td id="mA">—</td>
+            <td id="mB">—</td>
+            <td id="mC">—</td>
+          </tr>
+          <tr>
+            <th>Platform ask (ex)</th>
+            <td>Board $650 + 7402P $83 ≈ $733</td>
+            <td>Chassis TBD (server pull) + 7402P $83</td>
+            <td>Board $957 + 2×7402 $240 ≈ $1,197</td>
+          </tr>
+          <tr>
+            <th>Dual delta vs A</th>
+            <td colspan="2">—</td>
+            <td><strong>≈ +$464</strong> board+CPU only (H12DSi $957 + 2×$120 − ROMED8 $650 − 7402P $83)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SOURCES -->
+  <section class="panel span2">
+    <h2>Sources · retrieved 2026-09-07T01:52:32Z</h2>
+    <ul class="sources" id="sources"></ul>
+    <p class="fine">Full dossier: <code>_ppp/prices.json</code> · <code>_ppp/PRICES.md</code> · shots in <code>_ppp/shots/</code></p>
+  </section>
+</main>
+
+<footer class="foot">
+  Self-contained · open locally · no SaaS chrome · paper/industrial · prices are asks unless sold badge
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

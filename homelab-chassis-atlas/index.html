@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Homelab Chassis Atlas · Form-factor field guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/atlas.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="masthead">
+      <div class="masthead-left">
+        <h1>Homelab Chassis Atlas</h1>
+        <p class="deck">A visual field guide to the metal shapes in a home lab: true-scale U heights, depth bands, closet fit, NAS as a role, and EPYC platform eras (Naples → Rome → Milan) for SP3 chassis buyers, plus a used-market cost strip. Revision: Platforms used-cost.</p>
+      </div>
+      <div class="masthead-meta">
+        PPP · Tier 2 · EXPLAIN + COMPARISON<br />
+        Unit: chassis CLASS (not SKU)<br />
+        Retrieved 2026-09-04 CT · rev Platforms + used-cost
+        <div class="badge-row">
+          <span class="pill form">Axis A · form</span>
+          <span class="pill role">Axis B · role</span>
+          <span class="pill brass">EIA-310 / IEC 60297</span>
+          <span class="pill brass">SP3 · 7001-7003</span>
+        </div>
+      </div>
+    </header>
+
+    <nav class="tabs" role="tablist" aria-label="Atlas pages">
+      <button type="button" data-page="formfactor" class="active" role="tab">Form-factor
+        <span class="tab-q">What metal shapes exist?</span>
+      </button>
+      <button type="button" data-page="nas" role="tab">NAS vs boxes
+        <span class="tab-q">Why is that a category error?</span>
+      </button>
+      <button type="button" data-page="matrix" role="tab">Specialization
+        <span class="tab-q">What is each class for?</span>
+      </button>
+      <button type="button" data-page="platforms" role="tab">Platforms
+        <span class="tab-q">Naples → Rome → Milan?</span>
+      </button>
+      <button type="button" data-page="sources" role="tab">Sources
+        <span class="tab-q">Where do numbers come from?</span>
+      </button>
+    </nav>
+
+    <!-- PAGE 1 -->
+    <section class="page active" id="page-formfactor" role="tabpanel">
+      <div class="page-header">
+        <div>
+          <h2>Form-factor landscape</h2>
+          <p class="question">What metal shapes exist in a home lab, and how tall/deep are they really?</p>
+        </div>
+        <div class="callout">
+          <strong>Scale encoding:</strong> silhouette <em>height</em> is proportional to U (or mm vs 44.45 mm for non-rack). At rest: U · depth mm · bay count. Depth bar in the detail panel is the second encoding.
+        </div>
+      </div>
+
+      <div class="landscape">
+        <aside class="ruler" aria-label="EIA rack unit ruler">
+          <div class="title">EIA U</div>
+          <div class="ruler-ticks" id="ruler-ticks"></div>
+        </aside>
+        <div class="silhouettes" id="silhouettes" aria-label="Chassis class silhouettes"></div>
+        <aside class="side-panel" id="detail-panel">
+          <h3>Select a class</h3>
+          <p class="hint">Click a silhouette. Hover adds encoding notes without restating the label.</p>
+        </aside>
+      </div>
+
+      <div class="depth-legend">
+        <span>Depth examples (dossier): ultra-short ~225 mm · short ~295–399 mm · short-mid ~480–525 mm · dense 2U/4U ~650–864 mm · CMA can add ~177 mm (SC826)</span>
+      </div>
+
+      <div class="strip-block">
+        <h3 class="strip-title">Closet / cabinet fit <span class="tier implied">implied</span></h3>
+        <p class="strip-lead">Common enclosure depths vs chassis depth bands. Rails + cable management arm (CMA) need rear budget beyond chassis D (SC826: 863.6 → 1041 mm w/ CMA; Oracle guidance: ≥900 mm clearance behind front plane with CMA, ≥770 mm without; Intel: budget ~112–152 mm for cables).</p>
+        <div class="fit-strip" id="cabinet-fit-strip"></div>
+      </div>
+
+      <div class="strip-block">
+        <h3 class="strip-title">Common home-lab cabinet U counts <span class="tier direct">direct</span> heights · <span class="tier implied">implied</span> product mix</h3>
+        <p class="strip-lead">Mounting height = U × 44.45 mm. Wall/SOHO products commonly sold as 6U / 9U / 12U / 18U; floor towers include 22U and full 42U (1866.9 mm).</p>
+        <div class="cab-u-strip" id="cabinet-u-strip"></div>
+      </div>
+
+      <div class="width-strip">
+        <div class="width-card">
+          <h4>19-inch EIA</h4>
+          <div class="num">482.6 mm</div>
+          <p>Front-panel / mounting width. Rail hole-to-hole 465.1 mm. Opening ≥450 mm. External cabinets often 600 or 800 mm. <span class="tier direct">direct</span></p>
+        </div>
+        <div class="width-card">
+          <h4>10-inch mini</h4>
+          <div class="num">~236.5 mm</div>
+          <p>No worldwide width standard. Community hole spacing ~236.525 mm; Micropolis front 254 mm; usable opening 222.25 mm. Same 1U height. <span class="tier implied">implied</span></p>
+        </div>
+        <div class="width-card">
+          <h4>Free / tower</h4>
+          <div class="num">not EIA</div>
+          <p>Desktop cubes, appliances, mini-PCs, pedestals. Height is millimeters, not U, until a conversion kit puts ears on a 4U shell.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 2 -->
+    <section class="page" id="page-nas" role="tabpanel">
+      <div class="page-header">
+        <div>
+          <h2>NAS vs other boxes</h2>
+          <p class="question">Why is “NAS vs server” a category error if you only look at the case?</p>
+        </div>
+        <div class="callout warn">
+          <strong>Mandatory split:</strong> NAS is a <em>role</em> (file service + often appliance OS + storage-first design). It is not a unique metal shape. Rackmount appliance NAS (Synology RS) is the form×role intersection that breaks naive taxonomies.
+        </div>
+      </div>
+
+      <div class="nas-grid">
+        <div class="axis-board">
+          <h3>Two axes · form × role</h3>
+          <div class="axis-legend">
+            <span class="pill form">Form chips</span>
+            <span class="pill role">Role chips (NAS)</span>
+          </div>
+          <div class="matrix-2d" aria-label="Form by role grid">
+            <div class="corner"></div>
+            <div class="colhead">Storage role</div>
+            <div class="colhead">Compute / VM</div>
+            <div class="colhead">Network appl.</div>
+            <div class="colhead">GPU / lab</div>
+
+            <div class="rowhead">Desktop appliance</div>
+            <div class="cell">
+              <span class="chip" data-hover="<h4>Synology / QNAP-class</h4>Appliance OS on vendor desktop metal. DS423+ 166×199×223 mm; TS-464 165×170×226.5 mm.<div class='src'>Synology; QNAP · documented</div>">DS423+ / TS-464</span>
+            </div>
+            <div class="cell"><span class="chip metal">rare / limited</span></div>
+            <div class="cell"><span class="chip metal">vendor apps</span></div>
+            <div class="cell"><span class="chip metal">usually no</span></div>
+
+            <div class="rowhead">Desktop DIY case</div>
+            <div class="cell">
+              <span class="chip" data-hover="<h4>Jonsbo / Node</h4>DIY case marketed for NAS bay counts; OS is yours.<div class='src'>jonsbo.com; Fractal Node 804 · documented</div>">Jonsbo N3 / Node 804</span>
+            </div>
+            <div class="cell"><span class="chip metal">light Proxmox</span></div>
+            <div class="cell"><span class="chip metal">possible</span></div>
+            <div class="cell"><span class="chip metal">LP GPU maybe</span></div>
+
+            <div class="rowhead">Rack appliance</div>
+            <div class="cell">
+              <span class="chip" data-hover="<h4>Synology RS422+</h4>1U rack metal + DSM. 44×478×327.5 mm; 4 bay; 28.5 dB(A). Form×role intersection.<div class='src'>synology.com RS422+ · documented</div>">RS422+ 1U DSM</span>
+            </div>
+            <div class="cell"><span class="chip metal">light VMs on DSM</span></div>
+            <div class="cell"><span class="chip metal">vendor apps</span></div>
+            <div class="cell"><span class="chip metal">no</span></div>
+
+            <div class="rowhead">2U rack / shelf</div>
+            <div class="cell">
+              <span class="chip" data-hover="<h4>2U as NAS</h4>TrueNAS on RM21-class or SC826-class metal. Still a NAS role.<div class='src'>Silverstone; Supermicro JBOD · documented</div>">TrueNAS on 2U / JBOD</span>
+            </div>
+            <div class="cell"><span class="chip metal">Proxmox host</span></div>
+            <div class="cell"><span class="chip metal">firewall VM</span></div>
+            <div class="cell"><span class="chip metal">limited in 2U</span></div>
+
+            <div class="rowhead">4U / tower</div>
+            <div class="cell"><span class="chip">DIY NAS + disks</span></div>
+            <div class="cell"><span class="chip metal">homelab hypervisor</span></div>
+            <div class="cell"><span class="chip metal">mixed</span></div>
+            <div class="cell"><span class="chip metal">GPU workstation</span></div>
+          </div>
+          <p style="margin:10px 0 0;font-size:0.78rem;color:var(--ink-muted)">Reading left-to-right is role; top-to-bottom is metal. Green chips mark the NAS role on desktop appliance, DIY cube, rack appliance, and 2U shelf.</p>
+        </div>
+
+        <div>
+          <div class="trait-cols three">
+            <div class="trait-list appliance">
+              <h4>Appliance / storage-first</h4>
+              <ul>
+                <li><span><strong>Vendor OS</strong>: DSM, QTS, TOS locked to SKU</span><span class="tier direct">direct</span></li>
+                <li><span><strong>Bay-first SKU</strong>: marketed by drive count</span><span class="tier direct">direct</span></li>
+                <li><span><strong>Quiet desktop target</strong>: vendor dB(A) on datasheets</span><span class="tier direct">direct</span></li>
+                <li><span><strong>Limited CPU / PCIe</strong>: vs open DIY boards</span><span class="tier implied">implied</span></li>
+                <li><span><strong>Turnkey apps / relay</strong>: vendor remote access</span><span class="tier direct">direct</span></li>
+              </ul>
+            </div>
+            <div class="trait-list server">
+              <h4>Server-box traits</h4>
+              <ul>
+                <li><span><strong>IPMI / BMC</strong>: out-of-band power/console</span><span class="tier direct">direct</span></li>
+                <li><span><strong>ECC options</strong>: server memory paths</span><span class="tier implied">implied</span></li>
+                <li><span><strong>Open PCIe</strong>: HBA, NIC, GPU choice</span><span class="tier direct">direct</span></li>
+                <li><span><strong>Hot-swap backplanes</strong>: tray + expander metal</span><span class="tier direct">direct</span></li>
+                <li><span><strong>Dual / redundant PSU</strong>: enterprise shelves</span><span class="tier direct">direct</span></li>
+              </ul>
+            </div>
+            <div class="trait-list hybrid">
+              <h4>Hybrid / breaks the model</h4>
+              <ul>
+                <li><span><strong>Rackmount appliance NAS</strong>: RS422+: 1U + DSM</span><span class="tier direct">direct</span></li>
+                <li><span><strong>JBOD</strong>: enclosure without compute host</span><span class="tier direct">direct</span></li>
+                <li><span><strong>Server used as NAS</strong>: TrueNAS on RM21 / SC826</span><span class="tier direct">direct</span></li>
+                <li><span><strong>Hot-swap on both sides</strong>: trays ≠ role</span><span class="tier implied">implied</span></li>
+              </ul>
+            </div>
+          </div>
+          <p style="font-size:0.8rem;margin:10px 0 0;color:var(--ink-muted)">A box can mix traits. Hot-swap trays appear on Synology desktops, RS units, and Supermicro shelves. IPMI does not appear on most appliance NAS.</p>
+        </div>
+      </div>
+
+      <div class="overlap-examples four">
+        <div class="ex">
+          <h4>Appliance desktop</h4>
+          <p>Synology DS423+ 166×199×223 mm · 4 bay · 19.8 dB(A). QNAP TS-464 165×170×226.5 mm · 4 bay. TerraMaster F4-423 227×225×136 mm · 27.4 dB(A).</p>
+        </div>
+        <div class="ex">
+          <h4>DIY cube</h4>
+          <p>Jonsbo N3 233×262×298 mm · 8×3.5. Same NAS <em>role</em> as Synology; different OS and expandability.</p>
+        </div>
+        <div class="ex">
+          <h4>Rack appliance</h4>
+          <p>Synology RS422+ 44×478×327.5 mm · 1U · 4 bay · 28.5 dB(A) · 37.93/13.43 W. Rack metal + appliance OS.</p>
+        </div>
+        <div class="ex">
+          <h4>Rack DIY / shelf</h4>
+          <p>RM21-304 430×88.5×480 mm · 4 bay. SC826 JBOD 89×437×863.6 mm · 24 bay (1041 w/ CMA). Server metal wearing a storage role.</p>
+        </div>
+      </div>
+
+      <div class="decision-tree" aria-label="Interpretation decision tree">
+        <div class="dt-label">INTERPRETATION LAYER · not evidence</div>
+        <h3>Decision tree · “I need file service”</h3>
+        <div class="dt-flow">
+          <div class="dt-node root">I need file service</div>
+          <div class="dt-branch">
+            <div class="dt-col">
+              <div class="dt-edge">Want turnkey OS / apps</div>
+              <div class="dt-node">Appliance path</div>
+              <div class="dt-edge">Desktop quiet?</div>
+              <div class="dt-leaf">DS / TS / F4 class<br/><span>low dB(A) vendor targets</span></div>
+              <div class="dt-edge">Need 19" rack ears?</div>
+              <div class="dt-leaf">RS-class rack appliance<br/><span>ex. RS422+ ~328 mm D</span></div>
+            </div>
+            <div class="dt-col">
+              <div class="dt-edge">Want DIY OS (TrueNAS / Unraid / OMV)</div>
+              <div class="dt-node">Pick metal by constraints</div>
+              <div class="dt-edge">Living space · noise</div>
+              <div class="dt-leaf">Jonsbo / Node / tower<br/><span>avoid thin 1U screamers</span></div>
+              <div class="dt-edge">Closet depth · bays</div>
+              <div class="dt-leaf">Short 2U (~480) or dense 2U/4U<br/><span>match cabinet 450/600/800/1000+</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mechanisms">
+        <div class="m"><strong>Key mechanism</strong>Role overlays form; axes must stay split or the matrix lies.</div>
+        <div class="m"><strong>Load-bearing distinction</strong>Appliance OS + locked SKU vs DIY OS on commodity metal.</div>
+        <div class="m"><strong>What breaks the model</strong>Rackmount appliance NAS; JBOD without compute; TrueNAS on quiet cubes.</div>
+        <div class="m"><strong>Open questions</strong>Hybrid appliance-DIY firmware; class wattages (left unknown where unsourced).</div>
+      </div>
+    </section>
+
+    <!-- PAGE 3 -->
+    <section class="page" id="page-matrix" role="tabpanel">
+      <div class="page-header">
+        <div>
+          <h2>Specialization matrix</h2>
+          <p class="question">What is each class for? Pin one class; cells highlight ordinal deltas. Secondary line = example depth mm + bay count.</p>
+        </div>
+        <div class="callout">
+          Columns are comparable across classes. Green = higher than pin; rose = lower. Vendor dB(A)/W only where datasheet-stated (appliance rows). Other noise/power stay ordinal or unknown.
+        </div>
+      </div>
+
+      <div class="matrix-controls">
+        <label for="pin-select">Pin reference class</label>
+        <select id="pin-select" aria-label="Pin a chassis class"></select>
+        <span class="pill brass">Default pin: short/mid 2U DIY</span>
+        <span style="font-size:0.75rem;color:var(--ink-muted)">Hover a cell for the delta note. Secondary mm/bays are example SKUs, not averages.</span>
+      </div>
+
+      <div class="matrix-wrap">
+        <table class="spec-matrix" aria-label="Specialization matrix">
+          <thead>
+            <tr>
+              <th class="sticky-col">Class · depth* · bays</th>
+              <th>Drive density</th>
+              <th>Compute / GPU</th>
+              <th>Noise / power (room)</th>
+              <th>Remote mgmt</th>
+              <th>Expandability</th>
+              <th>Typical home-lab jobs</th>
+            </tr>
+          </thead>
+          <tbody id="matrix-body"></tbody>
+        </table>
+      </div>
+
+      <div class="start-strip">
+        <h3>If you are doing X, start here</h3>
+        <div class="note">INTERPRETATION LAYER · not evidence · opinionated strip grounded in the matrix above</div>
+        <div class="grid">
+          <div><strong>Quiet living-space files</strong>Appliance desktop or Jonsbo/Node DIY. Avoid thin 1U screamers (Uniqcli / Hardwarehoard / Level1).</div>
+          <div><strong>Closet rack, first real server</strong>Short/mid 2U DIY (~480 mm) in a 6–12U short wall cabinet (450–600 mm).</div>
+          <div><strong>Bulk disks / backup target</strong>Dense 2U shelf, 4U Norco-class, or RS appliance if you want DSM in-rack.</div>
+          <div><strong>Local GPU / inference</strong>4U GPU/workstation class; verify card length vs depth.</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- PAGE 5 · Platforms -->
+    <section class="page" id="page-platforms" role="tabpanel">
+      <div class="page-header">
+        <div>
+          <h2>EPYC platform eras</h2>
+          <p class="question">What changed Naples → Rome → Milan for the metal, board, cooler, PSU, and dual-socket rack?</p>
+        </div>
+        <div class="callout">
+          <strong>Chassis thesis:</strong> all three gens share socket <em>SP3</em>. Used 1U/2U Supermicro SP3 chassis stay useful across three CPU gens when the board BIOS supports the part. Rome→Milan is usually a CPU upgrade; Naples→Rome is the bigger platform jump.
+        </div>
+      </div>
+
+      <div class="plat-callouts">
+        <div class="plat-c key"><strong>Same socket SP3</strong>Naples · Rome · Milan = LGA 4094. One reason used SP3 racks keep working.</div>
+        <div class="plat-c jump"><strong>Naples → Rome</strong>Bigger jump: PCIe 3.0→4.0, Zeppelin MCM → IOD+CCD, DDR4-2666/2 TB → DDR4-3200/4 TB class.</div>
+        <div class="plat-c same"><strong>Rome → Milan</strong>Same platform plate: better Zen 3 cores/cache/IPC on the same board/cooler class (BIOS update).</div>
+        <div class="plat-c next"><strong>After Milan</strong>Genoa (9004) breaks to <em>SP5</em> + DDR5 + PCIe 5.0. Different boards/coolers. Footnote only.</div>
+      </div>
+
+      <div class="strip-block">
+        <h3 class="strip-title">Annotated timeline · platform plates <span class="tier direct">direct</span> socket/I/O · <span class="tier implied">implied</span> chassis reading</h3>
+        <p class="strip-lead">Each plate is a generation, not a SKU bake-off. Hover a plate for chassis notes. Milan-X is a Milan cache variant on the same SP3 plate.</p>
+        <div class="plat-timeline" id="plat-timeline" aria-label="EPYC generation timeline"></div>
+        <div class="genoa-note" id="genoa-footnote">
+          <span class="tag">WHAT COMES AFTER</span>
+          <strong>Genoa · EPYC 9004 · SP5</strong>
+          Socket break to LGA 6096. 12-channel DDR5 · 128× PCIe 5.0. SP3 coolers/boards do not carry forward. Not expanded into a full atlas here.
+          <span class="tier direct">direct</span>
+        </div>
+      </div>
+
+      <div class="page-header" style="margin-top:18px">
+        <div>
+          <h2 style="font-size:1.15rem">Generation comparison matrix</h2>
+          <p class="question">Pin a reference generation. Cells highlight what differs for chassis buyers.</p>
+        </div>
+      </div>
+
+      <div class="matrix-controls">
+        <label for="plat-pin-select">Pin reference generation</label>
+        <select id="plat-pin-select" aria-label="Pin an EPYC generation"></select>
+        <span class="pill brass">Default pin: Rome (7002)</span>
+        <span style="font-size:0.75rem;color:var(--ink-muted)">Hover a cell for delta vs pin + source tier. No invented benchmarks.</span>
+      </div>
+
+      <div class="matrix-wrap">
+        <table class="spec-matrix plat-matrix" aria-label="EPYC generation comparison matrix">
+          <thead>
+            <tr>
+              <th class="sticky-col">Dimension</th>
+              <th data-gen="naples">Naples · 7001</th>
+              <th data-gen="rome">Rome · 7002</th>
+              <th data-gen="milan">Milan · 7003</th>
+            </tr>
+          </thead>
+          <tbody id="plat-matrix-body"></tbody>
+        </table>
+      </div>
+
+      <div class="chassis-impl">
+        <h3>Chassis implications <span class="tier implied">implied</span> + sourced cooler dims</h3>
+        <div class="impl-grid">
+          <div class="impl">
+            <h4>Cooler height (SP3)</h4>
+            <p>Arctic Freezer 4U SP3: <strong>152 mm</strong> H, marketed for 4U, 300 W claim. Supermicro SNK-P0064AP4: 4U active, up to 280 W. AMD SP3 thermal guide reference heatsink mass &lt;450 g (OEM 1U/2U). Tall tower coolers used in homelab may exceed that mass. <span class="tier direct">direct</span></p>
+          </div>
+          <div class="impl">
+            <h4>Board form</h4>
+            <p>SP3 server boards are commonly EEB / proprietary. Dual-socket boards need two coolers and depth for DIMM banks + airflow. Same metal class for Rome and Milan. <span class="tier implied">implied</span></p>
+          </div>
+          <div class="impl">
+            <h4>1U thermal pain</h4>
+            <p>Short-depth 1U + high-TDP EPYC (Milan to 280 W) forces small high-RPM fans. Living-space noise risk matches the Form-factor 1U notes (Uniqcli / Hardwarehoard / Level1). Prefer 2U/4U for room-adjacent hosts. <span class="tier implied">implied</span></p>
+          </div>
+          <div class="impl">
+            <h4>Used BIOS caveats</h4>
+            <p>Socket continuity ≠ automatic CPU support. Example: Supermicro H12SSL-i listed Rome/Milan, not Naples. ASRock Rack ROMED8-2T cited as multi-gen with BIOS updates. Verify AGESA/BIOS before buying used SP3 boards for Milan. <span class="tier implied">implied</span></p>
+          </div>
+          <div class="impl">
+            <h4>PSU / 2P</h4>
+            <p>Non-P SKUs support 2P on all three gens; 2P spends 64 of 128 PCIe lanes on Infinity Fabric. System watts left <em>unknown</em> (not invented). Size PSU for CPU TDP + drives + NIC/GPU headroom. <span class="tier direct">direct</span> 2P · <span class="tier unknown">unknown</span> system W</p>
+          </div>
+          <div class="impl">
+            <h4>Milan-X footnote</h4>
+            <p>Milan-X (e.g. 7773X) adds 3D V-Cache on the Milan SP3 / DDR4 / PCIe 4.0 plate. Same chassis/board class; watch TDP (280 W on top SKUs). <span class="tier direct">direct</span></p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="used-cost" id="used-cost">
+        <div class="page-header" style="margin-top:18px">
+          <div>
+            <h2 style="font-size:1.15rem">Used market cost</h2>
+            <p class="question">What are live US-buyable asks for Naples / Rome / Milan tray CPUs today?</p>
+          </div>
+          <div class="callout">
+            <strong>Snapshot:</strong> asking prices opened 2026-09-04 America/Chicago. Not sold comps. Shipping and tax excluded unless a listing showed ship. Every $ traces to dossier Live rows.
+          </div>
+        </div>
+
+        <h3 class="strip-title">Generation bands <span class="tier direct">direct</span> from live samples</h3>
+        <p class="strip-lead">Bar length encodes approximate ask magnitude (USD). Mid P-sku bands; outliers called out under the bars.</p>
+        <div class="cost-bands" aria-label="Used ask bands by generation">
+          <div class="cost-band naples">
+            <div class="cb-label"><strong>Naples · 7001</strong><span>~$22–$300</span></div>
+            <div class="cb-track"><div class="cb-fill" style="width:12%"></div></div>
+            <div class="cb-meta">n=3 mid/low live · reseller high ~$599 separate</div>
+          </div>
+          <div class="cost-band rome">
+            <div class="cb-label"><strong>Rome · 7002 mid P</strong><span>~$67–$375</span></div>
+            <div class="cb-track"><div class="cb-fill" style="width:32%"></div></div>
+            <div class="cb-meta">7302P/7402P · n=5 · 7742 typically ~$500–$700</div>
+          </div>
+          <div class="cost-band milan">
+            <div class="cb-label"><strong>Milan · 7003 mid</strong><span>~$555–$1100</span></div>
+            <div class="cb-track"><div class="cb-fill" style="width:85%"></div></div>
+            <div class="cb-meta">7313P/7443P/7543P · n=5 · same SP3 plate premium</div>
+          </div>
+        </div>
+        <p class="cost-scale">Scale reference: fill width ∝ upper band ask vs ~$1100 Milan ceiling used for alignment. Rome 7502P Newegg Like-New $2250.99 is an outlier (not drawn as typical).</p>
+
+        <h3 class="strip-title" style="margin-top:16px">Live sample listings</h3>
+        <div class="matrix-wrap">
+          <table class="spec-matrix cost-table" aria-label="Live used EPYC asking prices">
+            <thead>
+              <tr>
+                <th>Gen</th>
+                <th>SKU</th>
+                <th>Cond</th>
+                <th>Ask</th>
+                <th>Ship</th>
+                <th>Source</th>
+                <th>Listing</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Naples</td><td>7401P</td><td>New</td><td>$22</td><td>$50</td><td>ebay</td><td><a href="https://www.ebay.co.uk/itm/115389266785" target="_blank" rel="noopener">ebay.co.uk/itm/115389266785</a></td><td>2026-09-04</td></tr>
+              <tr><td>Naples</td><td>7351</td><td>Used</td><td>£44.99 (~$58)</td><td>Free UK</td><td>ebay</td><td><a href="https://www.ebay.co.uk/itm/276390691263" target="_blank" rel="noopener">ebay.co.uk/itm/276390691263</a></td><td>2026-09-04</td></tr>
+              <tr><td>Naples</td><td>7351P</td><td>Used Dell</td><td>$299.98</td><td>Free</td><td>ebay</td><td><a href="https://www.ebay.co.uk/itm/124826942159" target="_blank" rel="noopener">ebay.co.uk/itm/124826942159</a></td><td>2026-09-04</td></tr>
+              <tr><td>Rome</td><td>7402P</td><td>Used</td><td>$67.20</td><td>n/a</td><td>reseller</td><td><a href="https://technologytraderz.com/buy-amd-epyc-rome-7402p-24-core-sp3-cpu-100-000000048-unlocked" target="_blank" rel="noopener">technologytraderz.com</a></td><td>2026-09-04</td></tr>
+              <tr><td>Rome</td><td>7402P</td><td>Used</td><td>$169.88</td><td>$6.88</td><td>ebay</td><td><a href="https://www.ebay.co.uk/itm/406129439732" target="_blank" rel="noopener">ebay.co.uk/itm/406129439732</a></td><td>2026-09-04</td></tr>
+              <tr><td>Rome</td><td>7302P</td><td>Used</td><td>$265.05</td><td>~$40–$80</td><td>ebay</td><td><a href="https://www.ebay.ca/itm/225671018740" target="_blank" rel="noopener">ebay.ca/itm/225671018740</a></td><td>2026-09-04</td></tr>
+              <tr><td>Rome</td><td>7302P</td><td>Refurb</td><td>$374.99</td><td>Free</td><td>newegg</td><td><a href="https://www.newegg.com/p/1WK-0184-00023" target="_blank" rel="noopener">newegg.com/p/1WK-0184-00023</a></td><td>2026-09-04</td></tr>
+              <tr><td>Rome</td><td>7742</td><td>Used</td><td>$699</td><td>Free / varies</td><td>ebay</td><td><a href="https://www.ebay.co.uk/itm/374069704624" target="_blank" rel="noopener">ebay.co.uk/itm/374069704624</a></td><td>2026-09-04</td></tr>
+              <tr><td>Milan</td><td>7443P</td><td>Refurb unlocked</td><td>£450 (~$585)</td><td>Free</td><td>ebay</td><td><a href="https://www.ebay.co.uk/itm/127852034846" target="_blank" rel="noopener">ebay.co.uk/itm/127852034846</a></td><td>2026-09-04</td></tr>
+              <tr><td>Milan</td><td>7313P</td><td>Opened</td><td>$555</td><td>Free</td><td>ebay</td><td><a href="https://www.ebay.co.uk/itm/116216118742" target="_blank" rel="noopener">ebay.co.uk/itm/116216118742</a></td><td>2026-09-04</td></tr>
+              <tr><td>Milan</td><td>7443P</td><td>Used</td><td>$799</td><td>Free</td><td>amazon</td><td><a href="https://www.amazon.com/AMD-7443P-EPYCTM/dp/B0CGJTT6RK" target="_blank" rel="noopener">amazon.com/…/B0CGJTT6RK</a></td><td>2026-09-04</td></tr>
+              <tr><td>Milan</td><td>7543P</td><td>Opened</td><td>EUR 979 (~$1070)</td><td>Free stated</td><td>ebay</td><td><a href="https://www.ebay.co.uk/itm/186193823093" target="_blank" rel="noopener">ebay.co.uk/itm/186193823093</a></td><td>2026-09-04</td></tr>
+              <tr><td>Board</td><td>H11SSL-i</td><td>Used</td><td>$455.80</td><td>$4.99</td><td>ebay</td><td><a href="https://www.ebay.ca/itm/175283496122" target="_blank" rel="noopener">ebay.ca/itm/175283496122</a></td><td>2026-09-04</td></tr>
+              <tr><td>Board</td><td>H12SSL-i</td><td>New</td><td>$850</td><td>Free</td><td>ebay</td><td><a href="https://www.ebay.co.uk/itm/335756645848" target="_blank" rel="noopener">ebay.co.uk/itm/335756645848</a></td><td>2026-09-04</td></tr>
+              <tr><td>System</td><td>R6415+7351P</td><td>Refurb 1U</td><td>$1180.99</td><td>n/a</td><td>reseller</td><td><a href="https://serversuperstore.com/products/dell-poweredge-r6415-10-bay-nvme-amd-epyc-7351p-32-cpu-cores-128gb-ram-2x-drive-trays" target="_blank" rel="noopener">serversuperstore.com</a></td><td>2026-09-04</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cost-interpret">
+          <h3>Interpretation <span class="pill brass">labeled interpretation</span></h3>
+          <div class="impl-grid">
+            <div class="impl">
+              <h4>Naples · cheap entry</h4>
+              <p>Tray asks can be tens of dollars (China New 7401P $22) to low hundreds (US Dell-pull 7351P ~$300). Buys Zen 1 / PCIe 3.0 on SP3 metal. Check board BIOS if you hoped to climb to Milan later.</p>
+            </div>
+            <div class="impl">
+              <h4>Rome · sweet spot PCIe 4</h4>
+              <p>Mid P-skus (7302P/7402P) cluster roughly $67–$375 today. Same cooler/board class as Milan on many H12 boards, with PCIe 4.0. 7742 jumps to ~$500–$700 for 64 cores.</p>
+            </div>
+            <div class="impl">
+              <h4>Milan · premium same SP3</h4>
+              <p>Mid Milan asks ~$555–$1100. You pay for Zen 3 cores/cache/IPC on the <em>same</em> SP3 chassis plate, not a new socket. H12 / ROMED8-class BIOS required; H11 Naples boards often will not boot Milan.</p>
+            </div>
+            <div class="impl">
+              <h4>Boards / systems</h4>
+              <p>Used H11SSL-i ~$456; New H12SSL-i ask ~$850. Complete 1U systems (e.g. R6415+7351P ~$1181) are labeled <strong>system</strong>, not CPU. BIOS caveat beats a cheap CPU.</p>
+            </div>
+          </div>
+          <p class="cost-disclaimer">Prices are <strong>asking</strong> snapshots from pages opened 2026-09-04, not guarantees of availability or sale price. Shipping/tax excluded unless shown on the listing. Vendor-lock (Dell/HPE) and phantom stock risk remain buyer checks.</p>
+        </div>
+      </div>
+
+      <div class="mechanisms">
+        <div class="m"><strong>Key mechanism</strong>SP3 continuity lets one chassis generation host three CPU eras when firmware allows.</div>
+        <div class="m"><strong>Load-bearing distinction</strong>Naples→Rome = platform jump (PCIe/chiplets/mem). Rome→Milan = CPU plate on same metal.</div>
+        <div class="m"><strong>What breaks the model</strong>Genoa/SP5; boards that never got Milan BIOS; 1U + 280 W in a living room.</div>
+        <div class="m"><strong>Open questions</strong>IPC/SPEC numbers (blank); Milan universal max GiB; measured NUMA latency; system idle watts.</div>
+      </div>
+    </section>
+
+    <!-- PAGE 4 -->
+    <section class="page" id="page-sources" role="tabpanel">
+      <div class="page-header">
+        <div>
+          <h2>Sources &amp; methodology</h2>
+          <p class="question">Where did the millimeters and judgments come from?</p>
+        </div>
+      </div>
+
+      <div class="sources-layout">
+        <aside class="sources-nav">
+          <h3>Confidence</h3>
+          <ul>
+            <li><span class="tier direct">direct</span> vendor/standard stated</li>
+            <li><span class="tier implied">implied</span> corroborated signals</li>
+            <li><span class="tier speculative">speculative</span> flagged or omitted</li>
+            <li><span class="tier unknown">unknown</span> left blank</li>
+          </ul>
+          <h3 style="margin-top:14px">Split</h3>
+          <ul>
+            <li>Standards → knobs/limits</li>
+            <li>Practitioners → taste/fit</li>
+            <li>Vendor pages → example metal</li>
+          </ul>
+          <h3 style="margin-top:14px">Conflicts</h3>
+          <ul>
+            <li>10" hole spacing: Geerling 236.525 vs Logan 237 mm vs Micropolis opening 222.25 (opening ≠ holes)</li>
+          </ul>
+          <h3 style="margin-top:14px">Intermediates</h3>
+          <ul>
+            <li>_ppp/plan.md</li>
+            <li>_ppp/dossier.md</li>
+            <li>_ppp/verification.md</li>
+          </ul>
+        </aside>
+
+        <div class="sources-main">
+          <div class="method-box">
+            <h3>Method</h3>
+            <p>Search-verified on 2026-09-04 (revisions: thicken; Platforms/EPYC eras; used-market cost strip). Standards from secondary EIA-310 / IEC 60297 explanations. Example chassis from vendor pages/datasheets. EPYC platform facts from AMD datasheets/product pages, Wikipedia Epyc, ServeTheHome, Boston IT, Level1Techs. Practitioner judgment cited by name. Used-market asks recorded from opened listings (not invented). No invented CPU benchmarks. Decision tree and “start here” strip are interpretation, labeled as such.</p>
+          </div>
+
+          <table>
+            <thead>
+              <tr><th>Kind</th><th>Source</th><th>Used for</th><th>Tier</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Standard (secondary)</td>
+                <td>payapress.com/standard-server-rack-dimensions/</td>
+                <td>1U=44.45 mm; 19 in=482.6 mm; hole pattern; depth not standardized; 42U height</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Standard (secondary)</td>
+                <td>ddbunlimited.com/accessories/racking-spec-layout/</td>
+                <td>EIA hole spacing; opening 17.72 in; horizontal 18.312 in</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Vendor</td>
+                <td>silverstonetek.com RM21-304 / RM22-312</td>
+                <td>2U DIY depths 480 / 660 mm; bay counts 4 / 12</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Vendor</td>
+                <td>supermicro.com CSE-826 JBOD</td>
+                <td>2U 24-bay; 863.6 mm; 1041 w/ CMA; IPMI; dual PSU</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Vendor</td>
+                <td>synology.com RS422+ (+ datasheet / HIG)</td>
+                <td>1U rack appliance 44×478×327.5 mm; 4 bay; 28.5 dB(A); 37.93/13.43 W</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Vendor</td>
+                <td>Synology DS423+ Data Sheet</td>
+                <td>166×199×223 mm; 19.8 dB(A); 28.3/8.45 W</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Vendor</td>
+                <td>qnap.com TS-464 specs</td>
+                <td>165×170×226.5 mm; 4 bay; ~40.5 W typical op</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Vendor</td>
+                <td>terra-master.com F4-423 specification</td>
+                <td>227×225×136 mm; 27.4 dB(A); 35.2/13.9 W</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Vendor</td>
+                <td>jonsbo.com N2 / N3 / N4</td>
+                <td>Desktop DIY NAS dims and bay layouts</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Vendor</td>
+                <td>Norco RPC-4224 PDF (sg-norco / norco.com.sg)</td>
+                <td>4U 24-bay 430×650×176 mm</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Vendor</td>
+                <td>streacom.com BC1 V2</td>
+                <td>Named open-bench example 360×250×8 plate; assembled ~115 mm H</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Vendor</td>
+                <td>Fractal Node 804; Intel NUC13 TPS; Genesys C452B</td>
+                <td>Cube / mini-PC / 4U GPU examples</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Vendor / guide</td>
+                <td>Oracle SPARC/Exalytics rack docs; Intel Server Rack Cabinet Compatibility Guide</td>
+                <td>CMA/rear clearance (≥900 mm w/ CMA; ~112–152 mm cable budget)</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Practitioner / vendor catalog</td>
+                <td>jama-net wall-mount enclosure guide; Server Room Environments U table; SecureGates; Cablify</td>
+                <td>SOHO cabinet U mix 6/9/12/18; mounting heights</td>
+                <td><span class="tier implied">implied</span></td>
+              </tr>
+              <tr>
+                <td>Practitioner</td>
+                <td>ServeTheHome SYS-112D / SYS-110A</td>
+                <td>Short-depth 1U; IPMI as server trait</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Practitioner</td>
+                <td>nascompares.com Synology DSM vs TrueNAS; RS422+ reveal</td>
+                <td>Appliance vs DIY; rack appliance dims cross-check</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Practitioner</td>
+                <td>getuniqcli.com tower-vs-rack-server-small-sites</td>
+                <td>1U acoustics geometry; short wall 450–600 mm; 6–12U</td>
+                <td><span class="tier implied">implied</span></td>
+              </tr>
+              <tr>
+                <td>Practitioner</td>
+                <td>hardwarehoard.com how-to-quiet-a-loud-server (2026)</td>
+                <td>1U idle noise band claim; BMC/fan mechanism</td>
+                <td><span class="tier implied">implied</span></td>
+              </tr>
+              <tr>
+                <td>Practitioner</td>
+                <td>forum.level1techs.com 1U servers are noisy…</td>
+                <td>Operator: 1U often loud; dense 2U audible upstairs</td>
+                <td><span class="tier implied">implied</span></td>
+              </tr>
+              <tr>
+                <td>Practitioner</td>
+                <td>forums.lawrencesystems.com 1U fan swap; TrueNAS vs Synology</td>
+                <td>Desk-adjacent 1U noise; operator OS taste</td>
+                <td><span class="tier implied">implied</span></td>
+              </tr>
+              <tr>
+                <td>Practitioner</td>
+                <td>github.com/geerlingguy/mini-rack; loganmarchione.com 2025-09-25</td>
+                <td>10-inch hole spacing; measured centers</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Vendor (CPU)</td>
+                <td>AMD EPYC 7003 Series Processors datasheet PDF</td>
+                <td>Milan Zen 3; 8ch DDR4-3200; 128× PCIe 4.0; TDP rows (7443P 200 W; 75F3 280 W); Milan-X</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Vendor (CPU)</td>
+                <td>amd.com EPYC 7002 series; WikiChip 7402P; Newegg 7302P listing</td>
+                <td>Rome PCIe 4.0; DDR4-3200; ≤4 TB; 7302P 155 W; 7402P 180 W</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Vendor (CPU)</td>
+                <td>AMD EPYC 7000 / Naples datasheet; AMD Memory Population Guidelines</td>
+                <td>Naples 8ch DDR4-2666; ≤2 TB/socket; PCIe 3.0 ×128; TDP ~120-180 W</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Vendor / std</td>
+                <td>Wikipedia Epyc; Wikipedia Socket SP5</td>
+                <td>SP3 continuity Naples-Milan; Genoa SP5 break; 2P IF lane cost; package topologies</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Practitioner</td>
+                <td>ServeTheHome AMD EPYC 7003 Milan; Boston IT Journey to Milan</td>
+                <td>Milan SKU/TDP context; Rome→Milan BIOS path; SP3 upgrade narrative</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Practitioner</td>
+                <td>Level1Techs EPYC Homelab / Milan workstation threads</td>
+                <td>H12SSL-i Rome/Milan not Naples; ROMED8-2T multi-gen; cooler height/mass notes</td>
+                <td><span class="tier implied">implied</span></td>
+              </tr>
+              <tr>
+                <td>Vendor (cooler)</td>
+                <td>arctic.de Freezer 4U SP3; AVADirect SNK-P0064AP4; AMD SP3 Thermal Design Guide 55423</td>
+                <td>152 mm cooler H; 280 W active cooler; &lt;450 g reference heatsink mass</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+
+              <tr>
+                <td>Used market</td>
+                <td>eBay.co.uk / eBay.ca item pages opened 2026-09-04 (Exa fetch)</td>
+                <td>Live BIN asks: Naples 7401P/7351/7351P; Rome 7402P/7302P/7742; Milan 7313P/7443P/7543P; H11/H12 boards</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Used market</td>
+                <td>Amazon B0CGJTT6RK; Newegg 1WK-0184-00023 / 2KY-003D-00018; technologytraderz; Flux IT; Server Superstore</td>
+                <td>US/UK reseller asks for 7443P, 7302P, 7402P, R6415 system</td>
+                <td><span class="tier direct">direct</span></td>
+              </tr>
+              <tr>
+                <td>Failed / Dead</td>
+                <td>eBay.com Playwright antibot; Bright Data unavailable; r/homelabsales empty; ended itm/115351710940, 357921961573, 196127327591; IT Creations qty 0</td>
+                <td>Not used as Live band anchors</td>
+                <td><span class="tier unknown">failed</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="unknowns">
+            <h3>Left blank on purpose</h3>
+            <ul>
+              <li>Open-bench / test-frame <em>class</em> standard dimensions (named Streacom BC1 V2 is illustration only).</li>
+              <li>Typical idle wattage by class (not invented; only vendor example watts shown).</li>
+              <li>Sold comps / guaranteed street prices (asks only; snapshot disclaimer on Platforms).</li>
+              <li>Verbatim EIA PDF clause numbers (secondary summaries used; marked).</li>
+              <li>Non-appliance matrix rows: numeric dB(A)/W left unknown.</li>
+              <li>EPYC IPC / SPEC / Cinebench scores (not invented).</li>
+              <li>Per-SKU cTDP bands unless datasheet-stated; Milan single universal max GiB; SP3 system idle watts; measured NUMA latency.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer-bar">
+      <span>Patrick’s Powerful Presentations · Homelab Chassis Atlas</span>
+      <span>1U = 44.45 mm · depth not in EIA-310 · NAS = role · SP3 = Naples-Milan</span>
+      <span>No em dashes were harmed in this field guide</span>
+    </footer>
+  </div>
+
+  <div class="hover-panel" id="hover-panel" role="tooltip"></div>
+  <script src="js/atlas.js"></script>
+</body>
+</html>
