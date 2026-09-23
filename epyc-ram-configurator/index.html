@@ -11,7 +11,7 @@
   <div class="mast-row">
     <div>
       <h1>EPYC Rome SP3 · 512 GB memory paths</h1>
-      <p class="sub">DIY vs chassis vs dual-socket · live asks retrieved <time id="stamp" datetime="2026-09-07T01:52:32Z">2026-09-07 01:52 UTC</time> · sources stamped · Patrick PPP</p>
+      <p class="sub">DIY vs chassis vs dual-socket · live asks retrieved <time datetime="2026-09-07T01:52:32Z">2026-09-07 01:52 UTC</time> · sources stamped · Patrick PPP · static (non-interactive)</p>
     </div>
     <div class="mast-badges">
       <span class="badge ask">ASK</span>
@@ -36,46 +36,16 @@
   Rome SP3 ceilings vary by CPU/population; faster sticks downclock. Buy 3200 only if the platform holds 3200 <em>and</em> the $/GB premium is worth the bandwidth.
 </section>
 
-<nav class="paths">
-  <button type="button" class="path-tab active" data-path="A">Path A · 8-DIMM DIY<br><small>8×64 only · ROMED8 / H12SSL</small></button>
-  <button type="button" class="path-tab" data-path="B">Path B · 16-DIMM 1S chassis<br><small>16×32 · R6515 / R7515 class</small></button>
-  <button type="button" class="path-tab" data-path="C">Path C · Dual-socket step-up<br><small>2× non-P · optional, not for 16×32</small></button>
+<nav class="paths-nav" aria-label="Memory paths">
+  <a href="#path-a">Path A · 8-DIMM DIY<br><small>8×64 only · ROMED8 / H12SSL</small></a>
+  <a href="#path-b">Path B · 16-DIMM 1S chassis<br><small>16×32 · R6515 / R7515 class</small></a>
+  <a href="#path-c">Path C · Dual-socket step-up<br><small>2× non-P · optional, not for 16×32</small></a>
 </nav>
 
-<main class="grid">
-  <!-- CONTROLS -->
-  <aside class="panel controls">
-    <h2>Configurator</h2>
-    <label>Active path
-      <select id="pathSel">
-        <option value="A">A · 8-DIMM DIY (8×64)</option>
-        <option value="B">B · 16-DIMM single-socket (16×32)</option>
-        <option value="C">C · Dual-socket step-up</option>
-      </select>
-    </label>
-    <label>Speed grade (MT/s)
-      <select id="speedSel">
-        <option value="2400">2400</option>
-        <option value="2666" selected>2666</option>
-        <option value="2933">2933</option>
-        <option value="3200">3200</option>
-      </select>
-    </label>
-    <label>Price basis
-      <select id="basisSel">
-        <option value="median" selected>DIMMsum median $/GB</option>
-        <option value="cheap">Cheapest live stick × count</option>
-      </select>
-    </label>
-    <div class="path-note" id="pathNote"></div>
-    <div class="totals" id="totals"></div>
-    <p class="fine">RAM totals for 512 GB. Board/CPU added below. Quiet case/PSU = +unknown.</p>
-  </aside>
-
-  <!-- SPEED LADDER -->
-  <section class="panel">
-    <h2>Speed ladder · 512 GB · $/GB and total</h2>
-    <p class="fine">Same capacity, four grades. <strong>2933</strong> called out as poor value. <strong>3200</strong> is the bandwidth step vs everything slower.</p>
+<main class="grid static-stack">
+  <section class="panel span2">
+    <h2>Speed ladder · 512 GB · $/GB and total (ASK median)</h2>
+    <p class="fine">Same capacity, four grades. <strong>2933</strong> called out as poor value. <strong>3200</strong> is the bandwidth step vs everything slower. Basis: DIMMsum median $/GB × 512 GB.</p>
     <div class="table-wrap">
       <table class="matrix" id="ladderTable">
         <thead>
@@ -87,30 +57,313 @@
             <th class="hi">3200</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          <tr><th>Path A · 8×64</th><td class="cell-num ">$5.83/GB<br><strong>$2,985</strong><br><span class="fine">cheap stick $295</span></td><td class="cell-num cell-best">$7.94/GB<br><strong>$4,065</strong><br><span class="fine">cheap stick $310</span></td><td class="cell-num cell-warn">$11.25/GB<br><strong>$5,760</strong><br><span class="fine">cheap stick $330</span></td><td class="cell-num cell-hi">$12.80/GB<br><strong>$6,554</strong><br><span class="fine">cheap stick $490</span></td></tr>
+          <tr><th>Path B · 16×32</th><td class="cell-num ">$5.50/GB<br><strong>$2,816</strong><br><span class="fine">cheap stick $125</span></td><td class="cell-num cell-best">$5.58/GB<br><strong>$2,857</strong><br><span class="fine">cheap stick $129</span></td><td class="cell-num cell-warn">$10.22/GB<br><strong>$5,233</strong><br><span class="fine">cheap stick $150</span></td><td class="cell-num cell-hi">$12.37/GB<br><strong>$6,333</strong><br><span class="fine">cheap stick $197</span></td></tr>
+          <tr><th>vs 2666 bandwidth</th>
+            <td class="cell-num">~−10%</td>
+            <td class="cell-num cell-best">baseline</td>
+            <td class="cell-num cell-warn">~+10% (pricey)</td>
+            <td class="cell-num cell-hi">~+20% (pay for it)</td>
+          </tr>
+        </tbody>
       </table>
     </div>
     <div class="legend">
       <span class="pill bad">2933 · worse $/GB</span>
       <span class="pill hi">3200 · bandwidth tier</span>
-      <span class="pill">ask · DIMMsum median unless noted</span>
+      <span class="pill">ask · DIMMsum median</span>
     </div>
   </section>
 
-  <!-- PATH DETAIL -->
-  <section class="panel span2" id="pathDetail">
-    <h2 id="pathTitle">Path A · 8-DIMM DIY</h2>
-    <div id="pathBody"></div>
+  <section class="panel span2 path-block" id="path-a">
+    <h2>Path A · 8-DIMM DIY</h2>
+    
+    <p class="path-note">ROMED8-2T / H12SSL-i class: typically 8 DIMM slots. For 512 GB you need 8×64. 16×32 does not fit. 7402P is fine (single-socket only).</p>
+    <div class="totals">
+      <div class="muted">Path A · 8-DIMM DIY · 8×64 · ASK median basis</div>
+      <div class="big">$4,065 <span style="font-size:0.7em;font-weight:500">RAM / 512 GB @2666</span></div>
+      <div class="row"><span class="muted">2666 median (ASK basis)</span><span>$4,065 · $7.94/GB <span class="fine">(baseline)</span></span></div><div class="row"><span class="muted">3200 median · bandwidth tier</span><span>$6,554 · $12.80/GB <span class="fine">(+$2,488 vs 2666)</span></span></div><div class="row"><span class="muted">2933 median · avoid for value</span><span>$5,760 · $11.25/GB <span class="fine">(+$1,695 vs 2666)</span></span></div><div class="row"><span class="muted">2400 median</span><span>$2,985 · $5.83/GB <span class="fine">(−$1,080 vs 2666)</span></span></div>
+      <div class="row"><span class="muted">Board ex</span><span>$650.00 ROMED8-2T</span></div>
+      <div class="row"><span class="muted">CPU ex</span><span>$82.76 7402P</span></div>
+      
+      <div class="row"><span class="muted">Case/PSU</span><span>+unknown</span></div>
+      <div class="row" style="margin-top:0.4rem;border-top:1px solid #c8c0b0;padding-top:0.35rem"><span><strong>Subtotal ex case @2666</strong></span><span><strong>$4,798</strong></span></div>
+    </div>
+    <div class="split" style="margin-top:0.75rem">
+      <div>
+        <h3 style="margin:0 0 0.4rem;font-size:0.9rem">Why 8×64 only</h3>
+        <p class="fine" style="margin:0">DIY ATX boards (ROMED8-2T, H12SSL-i) expose 8 DIMM slots. 8×32 = 256 GB. Hitting 512 GB on these boards means denser sticks: <strong>8×64</strong>.</p>
+      </div>
+      <div>
+        <h3 style="margin:0 0 0.4rem;font-size:0.9rem">Live board asks</h3>
+        <p class="fine" style="margin:0">ROMED8-2T GamePC <strong>$650</strong> · Aztek <strong>$688</strong> · H12SSL-i eBay ~<strong>$830–855</strong> OBO.</p>
+      </div>
+    </div>
+    <div class="bw-box">
+      <div><strong>2666 median · 512 GB</strong>$4,065 · $7.94/GB</div>
+      <div><strong>3200 median · bandwidth tier</strong>$6,554 · $12.80/GB<br><span class="fine">Premium vs 2666: $2,488 for ~+20% MT/s</span></div>
+      <div><strong>2933 median · avoid for value</strong>$5,760 · $11.25/GB<br><span class="fine">Premium vs 2666: $1,695 for only ~+10% MT/s</span></div>
+      <div><strong>2400 median</strong>$2,985 · $5.83/GB<br><span class="fine">LRDIMM-2400 proxy; RDIMM scarce</span></div>
+    </div>
   </section>
 
-  <!-- LIVE LISTINGS -->
+  <section class="panel span2 path-block" id="path-b">
+    <h2>Path B · 16-DIMM single-socket chassis</h2>
+    
+    <p class="path-note">Dell R6515 / R7515 class (and similar 1S 16-DIMM SP3 boxes) already have 16 slots. 16×32 = 512 GB on one socket. Dual-socket is NOT required for this population.</p>
+    <div class="totals">
+      <div class="muted">Path B · 16-DIMM single-socket chassis · 16×32 · ASK median basis</div>
+      <div class="big">$2,857 <span style="font-size:0.7em;font-weight:500">RAM / 512 GB @2666</span></div>
+      <div class="row"><span class="muted">2666 median (ASK basis)</span><span>$2,857 · $5.58/GB <span class="fine">(baseline)</span></span></div><div class="row"><span class="muted">3200 median · bandwidth tier</span><span>$6,333 · $12.37/GB <span class="fine">(+$3,476 vs 2666)</span></span></div><div class="row"><span class="muted">2933 median · avoid for value</span><span>$5,233 · $10.22/GB <span class="fine">(+$2,376 vs 2666)</span></span></div><div class="row"><span class="muted">2400 median</span><span>$2,816 · $5.50/GB <span class="fine">(−$41 vs 2666)</span></span></div>
+      <div class="row"><span class="muted">Board ex</span><span>+unknown chassis</span></div>
+      <div class="row"><span class="muted">CPU ex</span><span>$82.76 7402P</span></div>
+      
+      <div class="row"><span class="muted">Case/PSU</span><span>+unknown</span></div>
+      <div class="row" style="margin-top:0.4rem;border-top:1px solid #c8c0b0;padding-top:0.35rem"><span><strong>Subtotal ex case @2666</strong></span><span><strong>$2,940 +chassis</strong></span></div>
+    </div>
+    <div class="split" style="margin-top:0.75rem">
+      <div>
+        <h3 style="margin:0 0 0.4rem;font-size:0.9rem">16 DIMMs without dual-socket</h3>
+        <p class="fine" style="margin:0">Single-socket Dell PowerEdge R6515 / R7515 (and kin) wire 16 DIMM slots to one EPYC. Population for 512 GB: <strong>16×32</strong>. Often cheaper $/GB than 64 GB sticks at the same speed.</p>
+      </div>
+      <div>
+        <h3 style="margin:0 0 0.4rem;font-size:0.9rem">@2666 sample</h3>
+        <p class="fine" style="margin:0">Median 16×32: <strong>$2,857</strong> · cheapest-stick path 16×$129 ≈ <strong>$2,064</strong>. Chassis cost not priced today (server pull / refurb).</p>
+      </div>
+    </div>
+    <div class="bw-box">
+      <div><strong>2666 median · 512 GB</strong>$2,857 · $5.58/GB</div>
+      <div><strong>3200 median · bandwidth tier</strong>$6,333 · $12.37/GB<br><span class="fine">Premium vs 2666: $3,476 for ~+20% MT/s</span></div>
+      <div><strong>2933 median · avoid for value</strong>$5,233 · $10.22/GB<br><span class="fine">Premium vs 2666: $2,376 for only ~+10% MT/s</span></div>
+      <div><strong>2400 median</strong>$2,816 · $5.50/GB</div>
+    </div>
+  </section>
+
+  <section class="panel span2 path-block" id="path-c">
+    <h2>Path C · Dual-socket step-up (optional)</h2>
+    <div class="callout warn" style="margin:0 0 0.6rem">
+      <strong>7402P is single-socket only.</strong> Dual-socket needs <em>7402 (non-P) ×2</em>. Swapping a 7402P into a dual board will not enable the second socket.
+    </div>
+    
+    <p class="path-note">Separate from Path B. Dual needs 7402 (non-P) ×2 — 7402P is single-socket only. Board e.g. H12DSi-N6 / H11DSi. More memory channels; not required just to run 16×32.</p>
+    <div class="totals">
+      <div class="muted">Path C · Dual-socket step-up (optional) · 8×64 base (expandable) · ASK median basis</div>
+      <div class="big">$4,065 <span style="font-size:0.7em;font-weight:500">RAM / 512 GB @2666</span></div>
+      <div class="row"><span class="muted">2666 median (ASK basis)</span><span>$4,065 · $7.94/GB <span class="fine">(baseline)</span></span></div><div class="row"><span class="muted">3200 median · bandwidth tier</span><span>$6,554 · $12.80/GB <span class="fine">(+$2,488 vs 2666)</span></span></div><div class="row"><span class="muted">2933 median · avoid for value</span><span>$5,760 · $11.25/GB <span class="fine">(+$1,695 vs 2666)</span></span></div><div class="row"><span class="muted">2400 median</span><span>$2,985 · $5.83/GB <span class="fine">(−$1,080 vs 2666)</span></span></div>
+      <div class="row"><span class="muted">Board ex</span><span>$956.80 H12DSi-N6</span></div>
+      <div class="row"><span class="muted">CPU ex</span><span>$240.00 7402 ×2</span></div>
+      <div class="row"><span class="muted">Dual delta vs Path A platform</span><span>$464</span></div>
+      <div class="row"><span class="muted">Case/PSU</span><span>+unknown</span></div>
+      <div class="row" style="margin-top:0.4rem;border-top:1px solid #c8c0b0;padding-top:0.35rem"><span><strong>Subtotal ex case @2666</strong></span><span><strong>$5,262</strong></span></div>
+    </div>
+    <div class="split" style="margin-top:0.75rem">
+      <div>
+        <h3 style="margin:0 0 0.4rem;font-size:0.9rem">Platform delta vs Path A</h3>
+        <p class="fine" style="margin:0">Path A: ROMED8 $650 + 7402P $83 ≈ <strong>$733</strong><br>
+        Path C: H12DSi $957 + 2×7402 $120 ≈ <strong>$1,197</strong><br>
+        <strong>Delta ≈ $464</strong> (board+CPU). RAM may grow further on 16-slot dual boards.</p>
+      </div>
+      <div>
+        <h3 style="margin:0 0 0.4rem;font-size:0.9rem">Not required for 16×32</h3>
+        <p class="fine" style="margin:0">If the goal is only 16×32 @ 512 GB, use Path B (1S 16-DIMM chassis). Dual is for more cores, more channels, bigger memory ceilings.</p>
+      </div>
+    </div>
+    <div class="bw-box">
+      <div><strong>2666 median · 512 GB</strong>$4,065 · $7.94/GB (same 8×64 baseline)</div>
+      <div><strong>3200 median · bandwidth tier</strong>$6,554 · $12.80/GB<br><span class="fine">Premium vs 2666: $2,488</span></div>
+      <div><strong>2933 median · avoid for value</strong>$5,760 · $11.25/GB</div>
+      <div><strong>Platform ask (ex)</strong>Board $957 + 2×7402 $240 ≈ $1,197</div>
+    </div>
+  </section>
+
   <section class="panel span2">
     <h2>Live listing cards <span class="badge ask">ASK</span></h2>
-    <p class="fine">Opened URLs · not invented. Marked ask vs sold where known.</p>
-    <div class="cards" id="listingCards"></div>
+    <p class="fine">Opened URLs · not invented. Marked ask vs sold where known. Retrieved 2026-09-07T01:52:32Z.</p>
+    <div class="cards">
+    <article class="card">
+      <h3>ASRock ROMED8-2T</h3>
+      <div class="meta">8-DIMM · single SP3 · GamePC</div>
+      <div class="price">$650.00</div>
+      <div class="tags">
+        <span class="badge ask">ask</span>
+        <span class="badge conf-hi">high</span>
+        <span class="pill">Path A</span><span class="pill">board</span>
+      </div>
+      <a href="https://www.gamepc.com/shop/products?sku=ASR-ROMED82" target="_blank" rel="noopener">https://www.gamepc.com/shop/products?sku=ASR-ROMED82</a>
+      <div class="conf">retrieved 2026-09-07T01:52:32Z</div>
+    </article>
+    <article class="card">
+      <h3>ASRock ROMED8-2T</h3>
+      <div class="meta">Aztek · new special order</div>
+      <div class="price">$688.14</div>
+      <div class="tags">
+        <span class="badge ask">ask</span>
+        <span class="badge conf-hi">high</span>
+        <span class="pill">Path A</span><span class="pill">board</span>
+      </div>
+      <a href="https://www.aztekcomputers.com/romed8-2t-rack-atx-server-motherboard-sp3-lga4094-amd-epy-asrock/p" target="_blank" rel="noopener">https://www.aztekcomputers.com/romed8-2t-rack-atx-server-motherboard-sp3-lga4094-amd-epy-asrock/p</a>
+      <div class="conf">retrieved 2026-09-07T01:52:32Z</div>
+    </article>
+    <article class="card">
+      <h3>Supermicro H12SSL-i</h3>
+      <div class="meta">8-DIMM · eBay CA OBO</div>
+      <div class="price">$855.00</div>
+      <div class="tags">
+        <span class="badge ask">ask</span>
+        <span class="badge conf-med">medium</span>
+        <span class="pill">Path A</span><span class="pill">board</span>
+      </div>
+      <a href="https://www.ebay.ca/itm/296478745412" target="_blank" rel="noopener">https://www.ebay.ca/itm/296478745412</a>
+      <div class="conf">retrieved 2026-09-07T01:52:32Z</div>
+    </article>
+    <article class="card">
+      <h3>H12DSi-N6 bulk</h3>
+      <div class="meta">dual SP3 · 16 DIMM · Viperatech</div>
+      <div class="price">$956.80</div>
+      <div class="tags">
+        <span class="badge ask">ask</span>
+        <span class="badge conf-hi">high</span>
+        <span class="pill">Path C</span><span class="pill">board</span>
+      </div>
+      <a href="https://viperatech.com/product/supermicro-mbd-h12dsi-n6-b-motherboard" target="_blank" rel="noopener">https://viperatech.com/product/supermicro-mbd-h12dsi-n6-b-motherboard</a>
+      <div class="conf">retrieved 2026-09-07T01:52:32Z</div>
+    </article>
+    <article class="card">
+      <h3>H12DSi-N6 Newegg</h3>
+      <div class="meta">dual SP3 · PC Power Tech</div>
+      <div class="price">$1,185.00</div>
+      <div class="tags">
+        <span class="badge ask">ask</span>
+        <span class="badge conf-hi">high</span>
+        <span class="pill">Path C</span><span class="pill">board</span>
+      </div>
+      <a href="https://www.newegg.com/p/14U-0032-000X1" target="_blank" rel="noopener">https://www.newegg.com/p/14U-0032-000X1</a>
+      <div class="conf">retrieved 2026-09-07T01:52:32Z</div>
+    </article>
+    <article class="card">
+      <h3>H11DSi-NT rev 2.0</h3>
+      <div class="meta">dual SP3 · eBay San Jose ship</div>
+      <div class="price">$894.90</div>
+      <div class="tags">
+        <span class="badge ask">ask</span>
+        <span class="badge conf-med">medium</span>
+        <span class="pill">Path C</span><span class="pill">board</span>
+      </div>
+      <a href="https://www.ebay.com.au/itm/322602818335" target="_blank" rel="noopener">https://www.ebay.com.au/itm/322602818335</a>
+      <div class="conf">retrieved 2026-09-07T01:52:32Z</div>
+    </article>
+    <article class="card">
+      <h3>EPYC 7402P unlocked</h3>
+      <div class="meta">TechnologyTraderz · 1P only · stock 38</div>
+      <div class="price">$82.76</div>
+      <div class="tags">
+        <span class="badge ask">ask</span>
+        <span class="badge conf-hi">high</span>
+        <span class="pill">CPU</span><span class="pill">1P</span>
+      </div>
+      <a href="https://technologytraderz.com/buy-amd-epyc-rome-7402p-24-core-sp3-cpu-100-000000048-unlocked" target="_blank" rel="noopener">https://technologytraderz.com/buy-amd-epyc-rome-7402p-24-core-sp3-cpu-100-000000048-unlocked</a>
+      <div class="conf">retrieved 2026-09-07T01:52:32Z</div>
+    </article>
+    <article class="card">
+      <h3>EPYC 7402 non-P refurb</h3>
+      <div class="meta">ServerSupply · 1P/2P · $120 ea</div>
+      <div class="price">$120.00</div>
+      <div class="tags">
+        <span class="badge ask">ask</span>
+        <span class="badge conf-hi">high</span>
+        <span class="pill">CPU</span><span class="pill">2P</span>
+      </div>
+      <a href="https://www.serversupply.com/PROCESSORS/AMD%20EPYC%2024-Core/2.8GHz/AMD/100-000000046_329864.htm" target="_blank" rel="noopener">https://www.serversupply.com/PROCESSORS/AMD%20EPYC%2024-Core/2.8GHz/AMD/100-000000046_329864.htm</a>
+      <div class="conf">retrieved 2026-09-07T01:52:32Z</div>
+    </article>
+    <article class="card">
+      <h3>EPYC 7402 OEM</h3>
+      <div class="meta">StarMicro</div>
+      <div class="price">$250.00</div>
+      <div class="tags">
+        <span class="badge ask">ask</span>
+        <span class="badge conf-hi">high</span>
+        <span class="pill">CPU</span><span class="pill">2P</span>
+      </div>
+      <a href="https://starmicroinc.net/amd-epyc-7402-2-8ghz-socket-sp3-24-core-zen-2-server-oem-cpu-100-000000046/" target="_blank" rel="noopener">https://starmicroinc.net/amd-epyc-7402-2-8ghz-socket-sp3-24-core-zen-2-server-oem-cpu-100-000000046/</a>
+      <div class="conf">retrieved 2026-09-07T01:52:32Z</div>
+    </article>
+    <article class="card">
+      <h3>A-Tech 8×64GB DDR4-2666</h3>
+      <div class="meta">512 GB kit · DIMMsum cheapest 8-lot</div>
+      <div class="price">$3,384.84</div>
+      <div class="tags">
+        <span class="badge ask">ask</span>
+        <span class="badge conf-hi">high</span>
+        <span class="pill">RAM</span><span class="pill">8×64</span><span class="pill">2666</span>
+      </div>
+      <a href="https://dimmsum.com/ddr4/64gb-2666-rdimm" target="_blank" rel="noopener">https://dimmsum.com/ddr4/64gb-2666-rdimm</a>
+      <div class="conf">retrieved 2026-09-07T01:52:32Z</div>
+    </article>
+    <article class="card">
+      <h3>NEMIX 2×64GB DDR4-2666</h3>
+      <div class="meta">128 GB · $3.39/GB lot</div>
+      <div class="price">$433.58</div>
+      <div class="tags">
+        <span class="badge ask">ask</span>
+        <span class="badge conf-hi">high</span>
+        <span class="pill">RAM</span><span class="pill">2666</span>
+      </div>
+      <a href="https://dimmsum.com/ddr4/64gb-2666-rdimm" target="_blank" rel="noopener">https://dimmsum.com/ddr4/64gb-2666-rdimm</a>
+      <div class="conf">retrieved 2026-09-07T01:52:32Z</div>
+    </article>
+    <article class="card">
+      <h3>Kingston 32GB DDR4-2666</h3>
+      <div class="meta">cheapest single · Path B brick</div>
+      <div class="price">$128.61</div>
+      <div class="tags">
+        <span class="badge ask">ask</span>
+        <span class="badge conf-hi">high</span>
+        <span class="pill">RAM</span><span class="pill">16×32</span><span class="pill">2666</span>
+      </div>
+      <a href="https://dimmsum.com/ddr4/32gb-2666-rdimm" target="_blank" rel="noopener">https://dimmsum.com/ddr4/32gb-2666-rdimm</a>
+      <div class="conf">retrieved 2026-09-07T01:52:32Z</div>
+    </article>
+    <article class="card">
+      <h3>8×32GB DDR4-2933 kit</h3>
+      <div class="meta">256 GB · $6.22/GB · poor value vs 2666</div>
+      <div class="price">$1,592.00</div>
+      <div class="tags">
+        <span class="badge ask">ask</span>
+        <span class="badge conf-hi">high</span>
+        <span class="pill">RAM</span><span class="pill">2933</span>
+      </div>
+      <a href="https://dimmsum.com/ddr4/32gb-2933-rdimm" target="_blank" rel="noopener">https://dimmsum.com/ddr4/32gb-2933-rdimm</a>
+      <div class="conf">retrieved 2026-09-07T01:52:32Z</div>
+    </article>
+    <article class="card">
+      <h3>NEMIX 4×32GB DDR4-3200</h3>
+      <div class="meta">128 GB · bandwidth tier lot</div>
+      <div class="price">$749.00</div>
+      <div class="tags">
+        <span class="badge ask">ask</span>
+        <span class="badge conf-hi">high</span>
+        <span class="pill">RAM</span><span class="pill">3200</span>
+      </div>
+      <a href="https://dimmsum.com/ddr4/32gb-3200-rdimm" target="_blank" rel="noopener">https://dimmsum.com/ddr4/32gb-3200-rdimm</a>
+      <div class="conf">retrieved 2026-09-07T01:52:32Z</div>
+    </article>
+    <article class="card">
+      <h3>64GB DDR4-2933 cheapest</h3>
+      <div class="meta">Kingston KSM29 · $5.16/GB still &gt; 2666 med</div>
+      <div class="price">$329.99</div>
+      <div class="tags">
+        <span class="badge ask">ask</span>
+        <span class="badge conf-hi">high</span>
+        <span class="pill">RAM</span><span class="pill">2933</span>
+      </div>
+      <a href="https://dimmsum.com/ddr4/64gb-2933-rdimm" target="_blank" rel="noopener">https://dimmsum.com/ddr4/64gb-2933-rdimm</a>
+      <div class="conf">retrieved 2026-09-07T01:52:32Z</div>
+    </article>
+    </div>
   </section>
 
-  <!-- COMPARISON MATRIX -->
   <section class="panel span2">
     <h2>Comparison matrix · sample builds @ 2666 median</h2>
     <div class="table-wrap">
@@ -144,9 +397,9 @@
           </tr>
           <tr>
             <th>RAM @2666 median</th>
-            <td id="mA">—</td>
-            <td id="mB">—</td>
-            <td id="mC">—</td>
+            <td>$4,065 · $7.94/GB</td>
+            <td>$2,857 · $5.58/GB</td>
+            <td>$4,065 (same 8×64 baseline)</td>
           </tr>
           <tr>
             <th>Platform ask (ex)</th>
@@ -164,17 +417,16 @@
     </div>
   </section>
 
-  <!-- SOURCES -->
   <section class="panel span2">
     <h2>Sources · retrieved 2026-09-07T01:52:32Z</h2>
-    <ul class="sources" id="sources"></ul>
+    <ul class="sources"><li><a href="https://dimmsum.com/ddr4" target="_blank" rel="noopener">DIMMsum DDR4 index</a></li><li><a href="https://dimmsum.com/ddr4/64gb-2666-rdimm" target="_blank" rel="noopener">64GB-2666 / 2933 / 3200</a></li><li><a href="https://dimmsum.com/ddr4/32gb-2666-rdimm" target="_blank" rel="noopener">32GB-2400 / 2666 / 2933 / 3200</a></li><li><a href="https://www.gamepc.com/shop/products?sku=ASR-ROMED82" target="_blank" rel="noopener">GamePC ROMED8-2T $650</a></li><li><a href="https://technologytraderz.com/buy-amd-epyc-rome-7402p-24-core-sp3-cpu-100-000000048-unlocked" target="_blank" rel="noopener">TechnologyTraderz 7402P $82.76</a></li><li><a href="https://www.serversupply.com/PROCESSORS/AMD%20EPYC%2024-Core/2.8GHz/AMD/100-000000046_329864.htm" target="_blank" rel="noopener">ServerSupply 7402 $120</a></li><li><a href="https://viperatech.com/product/supermicro-mbd-h12dsi-n6-b-motherboard" target="_blank" rel="noopener">Viperatech H12DSi-N6 $956.80</a></li><li><a href="https://www.newegg.com/p/14U-0032-000X1" target="_blank" rel="noopener">Newegg H12DSi-N6 $1185</a></li><li><a href="https://datacenterdisk.com/server-ram/ddr4/64gb" target="_blank" rel="noopener">datacenterdisk 64GB retail ladder</a></li>
+    </ul>
     <p class="fine">Full dossier: <code>_ppp/prices.json</code> · <code>_ppp/PRICES.md</code> · shots in <code>_ppp/shots/</code></p>
   </section>
 </main>
 
 <footer class="foot">
-  Self-contained · open locally · no SaaS chrome · paper/industrial · prices are asks unless sold badge
+  Self-contained static HTML · no JS · no SaaS chrome · paper/industrial · prices are asks unless sold badge · retrieved 2026-09-07T01:52:32Z
 </footer>
-<script src="app.js"></script>
 </body>
 </html>

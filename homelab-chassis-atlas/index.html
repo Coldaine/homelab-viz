@@ -29,46 +29,371 @@
       </div>
     </header>
 
-    <nav class="tabs" role="tablist" aria-label="Atlas pages">
-      <button type="button" data-page="formfactor" class="active" role="tab">Form-factor
+    <nav class="tabs" aria-label="Atlas sections">
+      <a href="#formfactor" class="tab-link">Form-factor
         <span class="tab-q">What metal shapes exist?</span>
-      </button>
-      <button type="button" data-page="nas" role="tab">NAS vs boxes
+      </a>
+      <a href="#nas" class="tab-link">NAS vs boxes
         <span class="tab-q">Why is that a category error?</span>
-      </button>
-      <button type="button" data-page="matrix" role="tab">Specialization
+      </a>
+      <a href="#matrix" class="tab-link">Specialization
         <span class="tab-q">What is each class for?</span>
-      </button>
-      <button type="button" data-page="platforms" role="tab">Platforms
+      </a>
+      <a href="#platforms" class="tab-link">Platforms
         <span class="tab-q">Naples → Rome → Milan?</span>
-      </button>
-      <button type="button" data-page="sources" role="tab">Sources
+      </a>
+      <a href="#sources" class="tab-link">Sources
         <span class="tab-q">Where do numbers come from?</span>
-      </button>
+      </a>
     </nav>
 
     <!-- PAGE 1 -->
-    <section class="page active" id="page-formfactor" role="tabpanel">
+    <section class="page" id="formfactor">
       <div class="page-header">
         <div>
           <h2>Form-factor landscape</h2>
           <p class="question">What metal shapes exist in a home lab, and how tall/deep are they really?</p>
         </div>
         <div class="callout">
-          <strong>Scale encoding:</strong> silhouette <em>height</em> is proportional to U (or mm vs 44.45 mm for non-rack). At rest: U · depth mm · bay count. Depth bar in the detail panel is the second encoding.
+          <strong>Scale encoding:</strong> silhouette <em>height</em> is proportional to U (or mm vs 44.45 mm for non-rack). Labels show U · depth mm · bay count. Depth bars in the dossiers below are the second encoding. All class dossiers are listed under the strip — no clicks required.
         </div>
       </div>
 
       <div class="landscape">
         <aside class="ruler" aria-label="EIA rack unit ruler">
           <div class="title">EIA U</div>
-          <div class="ruler-ticks" id="ruler-ticks"></div>
+          <div class="ruler-ticks"><div class="tick" style="height:22px">1U</div><div class="tick" style="height:22px">2U</div><div class="tick" style="height:22px">3U</div><div class="tick" style="height:22px">4U</div><div class="tick" style="height:22px">5U</div><div class="tick" style="height:22px">6U</div><div class="tick" style="height:22px">7U</div><div class="tick" style="height:22px">8U</div><div class="tick" style="height:22px">9U</div><div class="tick" style="height:22px">10U</div><div class="tick" style="height:22px">11U</div></div>
         </aside>
-        <div class="silhouettes" id="silhouettes" aria-label="Chassis class silhouettes"></div>
-        <aside class="side-panel" id="detail-panel">
-          <h3>Select a class</h3>
-          <p class="hint">Click a silhouette. Hover adds encoding notes without restating the label.</p>
-        </aside>
+        <div class="silhouettes" aria-label="Chassis class silhouettes">
+<div class="chassis " data-id="1u-short">
+      <div class="body" style="height:22px">
+        <div class="ear-l"></div><div class="ear-r"></div>
+        <div class="bay-grid" style="grid-template-columns:repeat(2,1fr);opacity:1"><div class="bay"></div><div class="bay"></div></div>
+      </div>
+      <div class="label">Short-depth 1U</div>
+      <div class="meta">1U<br>399 mm D*<br>ex. 0–2 bays</div>
+    </div>
+<div class="chassis " data-id="ultra2u">
+      <div class="body" style="height:44px">
+        <div class="ear-l"></div><div class="ear-r"></div>
+        <div class="bay-grid" style="grid-template-columns:repeat(2,1fr);opacity:1"><div class="bay"></div><div class="bay"></div></div>
+      </div>
+      <div class="label">Ultra-short 2U Mini-ITX</div>
+      <div class="meta">2U<br>225 mm D*<br>ex. 1 bay / low</div>
+    </div>
+<div class="chassis " data-id="2u-short">
+      <div class="body" style="height:44px">
+        <div class="ear-l"></div><div class="ear-r"></div>
+        <div class="bay-grid" style="grid-template-columns:repeat(2,1fr);opacity:1"><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div></div>
+      </div>
+      <div class="label">Short/mid 2U DIY</div>
+      <div class="meta">2U<br>480 mm D*<br>ex. 4 hot-swap</div>
+    </div>
+<div class="chassis shelf" data-id="2u-dense">
+      <div class="body" style="height:44px">
+        <div class="ear-l"></div><div class="ear-r"></div>
+        <div class="bay-grid" style="grid-template-columns:repeat(4,1fr);opacity:1"><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div></div>
+      </div>
+      <div class="label">Dense 2U / disk shelf</div>
+      <div class="meta">2U<br>864 mm D*<br>ex. 12–24 bays</div>
+    </div>
+<div class="chassis appliance-rack" data-id="rack-appliance">
+      <div class="body" style="height:22px">
+        <div class="ear-l"></div><div class="ear-r"></div>
+        <div class="bay-grid" style="grid-template-columns:repeat(2,1fr);opacity:1"><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div></div>
+      </div>
+      <div class="label">Rackmount appliance NAS</div>
+      <div class="meta">1U<br>327.5 mm D*<br>ex. 4 hot-swap</div>
+    </div>
+<div class="chassis " data-id="4u-gpu">
+      <div class="body" style="height:88px">
+        <div class="ear-l"></div><div class="ear-r"></div>
+        <div class="bay-grid" style="grid-template-columns:repeat(2,1fr);opacity:1"><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div></div>
+      </div>
+      <div class="label">4U GPU / workstation</div>
+      <div class="meta">4U<br>525 mm D*<br>ex. ~4 bays</div>
+    </div>
+<div class="chassis shelf" data-id="4u-dense">
+      <div class="body" style="height:88px">
+        <div class="ear-l"></div><div class="ear-r"></div>
+        <div class="bay-grid" style="grid-template-columns:repeat(4,1fr);opacity:1"><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div></div>
+      </div>
+      <div class="label">4U dense storage</div>
+      <div class="meta">4U<br>650 mm D*<br>ex. 24 hot-swap</div>
+    </div>
+<div class="chassis tower no-ears" data-id="tower">
+      <div class="body" style="height:88px">
+        <div class="ear-l"></div><div class="ear-r"></div>
+        <div class="bay-grid" style="grid-template-columns:repeat(4,1fr);opacity:1"><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div></div>
+      </div>
+      <div class="label">Tower / pedestal</div>
+      <div class="meta">4U<br>648 mm D*<br>ex. mid bay count</div>
+    </div>
+<div class="chassis desktop no-ears" data-id="desktop-diy">
+      <div class="body" style="height:147.49156355455568px">
+        <div class="ear-l"></div><div class="ear-r"></div>
+        <div class="bay-grid" style="grid-template-columns:repeat(4,1fr);opacity:1"><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div></div>
+      </div>
+      <div class="label">Desktop DIY NAS case</div>
+      <div class="meta">298 mm H<br>262 mm D*<br>ex. 5–10× 3.5</div>
+    </div>
+<div class="chassis desktop no-ears" data-id="appliance">
+      <div class="body" style="height:82.15973003374577px">
+        <div class="ear-l"></div><div class="ear-r"></div>
+        <div class="bay-grid" style="grid-template-columns:repeat(2,1fr);opacity:1"><div class="bay"></div><div class="bay"></div><div class="bay"></div><div class="bay"></div></div>
+      </div>
+      <div class="label">Appliance desktop NAS</div>
+      <div class="meta">166 mm H<br>223 mm D*<br>ex. 4 bays</div>
+    </div>
+<div class="chassis ten" data-id="10inch">
+      <div class="body" style="height:132px">
+        <div class="ear-l"></div><div class="ear-r"></div>
+        <div class="bay-grid" style="grid-template-columns:repeat(1,1fr);opacity:0.15"><div class="bay"></div></div>
+      </div>
+      <div class="label">10-inch mini-rack</div>
+      <div class="meta">6U<br>250 mm D*<br>no bays (gear rack)</div>
+    </div>
+<div class="chassis minipc no-ears" data-id="minipc">
+      <div class="body" style="height:26.726659167604048px">
+        <div class="ear-l"></div><div class="ear-r"></div>
+        <div class="bay-grid" style="grid-template-columns:repeat(1,1fr);opacity:0.15"><div class="bay"></div></div>
+      </div>
+      <div class="label">Mini-PC / NUC-class</div>
+      <div class="meta">54 mm H<br>112 mm D*<br>no bays / NUC</div>
+    </div>
+<div class="chassis open no-ears" data-id="open">
+      <div class="body" style="height:56.91788526434195px">
+        <div class="ear-l"></div><div class="ear-r"></div>
+        <div class="bay-grid" style="grid-template-columns:repeat(1,1fr);opacity:0.15"><div class="bay"></div></div>
+      </div>
+      <div class="label">Open bench / test frame</div>
+      <div class="meta">115 mm H<br>depth class unknown<br>ex. 0–2 (named)</div>
+    </div>
+        </div>
+      </div>
+
+      <div class="dossier-grid" aria-label="Chassis class dossiers">
+<article class="dossier" id="class-1u-short">
+      <h3>Short-depth 1U</h3>
+      <div class="dim-row"><span class="k">Family</span><span>19-inch rack</span></div>
+      <div class="dim-row"><span class="k">Height</span><span>1U = 44.45 mm <span class="tier direct">direct</span></span></div>
+      <div class="dim-row"><span class="k">Depth*</span><span>ex. 249–399 mm
+        <div class="depth-bar"><div class="fill" style="width:36.27272727272727%"></div></div>
+        <span class="hint">Bar vs 1100 mm. EIA does not fix depth. Band: short (~300–450 mm)</span>
+      </span></div>
+      <div class="dim-row"><span class="k">Width</span><span>~482 mm panel</span></div>
+      <div class="dim-row"><span class="k">Bays</span><span>ex. 0–2 bays</span></div>
+      <div class="dim-row"><span class="k">MB form</span><span>vendor board / edge SoC</span></div>
+      <div class="dim-row"><span class="k">Notable I/O</span><span>IPMI common; SFP/SFP28 on network SKUs</span></div>
+      <div class="dim-row"><span class="k">PSU</span><span>Often fixed / vendor PSU; not DIY ATX</span></div>
+      <p>Network/edge 1U with shallow depth for wall racks and telecom-style front access. Thin profile forces small high-RPM fans (living-space noise risk).</p>
+      <div class="example"><strong>Examples (illustration only)</strong><div class="ex-item"><strong>Supermicro SYS-112D-40C-FN8P</strong>: 399 mm D; IPMI + 8×25GbE SFP28 <span class="tier direct">direct</span><br><span class="hint">ServeTheHome 2026-04-16</span></div><div class="ex-item"><strong>Supermicro SYS-110A-16C-RN10SP</strong>: 9.8 in (~249 mm) D <span class="tier direct">direct</span><br><span class="hint">ServeTheHome</span></div></div>
+      <p class="hint">*Depth values are example chassis from the dossier, not a class average. Source tier shown per example.</p>
+    </article>
+<article class="dossier" id="class-ultra2u">
+      <h3>Ultra-short 2U Mini-ITX</h3>
+      <div class="dim-row"><span class="k">Family</span><span>19-inch rack</span></div>
+      <div class="dim-row"><span class="k">Height</span><span>2U = 88.9 mm <span class="tier direct">direct</span></span></div>
+      <div class="dim-row"><span class="k">Depth*</span><span>225 mm
+        <div class="depth-bar"><div class="fill" style="width:20.454545454545457%"></div></div>
+        <span class="hint">Bar vs 1100 mm. EIA does not fix depth. Band: ultra-short (~200–300 mm)</span>
+      </span></div>
+      <div class="dim-row"><span class="k">Width</span><span>483 mm</span></div>
+      <div class="dim-row"><span class="k">Bays</span><span>ex. 1 bay / low</span></div>
+      <div class="dim-row"><span class="k">MB form</span><span>Mini-ITX</span></div>
+      <div class="dim-row"><span class="k">Notable I/O</span><span>DIY rear I/O from MB</span></div>
+      <div class="dim-row"><span class="k">PSU</span><span>Flex / short PSU typical</span></div>
+      <p>Extreme shallow 2U (~225 mm) for shallow wall cabinets. Trades bays and cooler height for fit.</p>
+      <div class="example"><strong>Examples (illustration only)</strong><div class="ex-item"><strong>MyElectronics / mini-itx.com 2U</strong>: 483×88.5×225 mm <span class="tier direct">direct</span><br><span class="hint">myelectronics.nl; mini-itx.com</span></div><div class="ex-item"><strong>U-Rack U2000N1000</strong>: ~227 mm deep 2U class <span class="tier direct">direct</span><br><span class="hint">urack.com.tw</span></div></div>
+      <p class="hint">*Depth values are example chassis from the dossier, not a class average. Source tier shown per example.</p>
+    </article>
+<article class="dossier" id="class-2u-short">
+      <h3>Short/mid 2U DIY</h3>
+      <div class="dim-row"><span class="k">Family</span><span>19-inch rack</span></div>
+      <div class="dim-row"><span class="k">Height</span><span>2U = 88.9 mm <span class="tier direct">direct</span></span></div>
+      <div class="dim-row"><span class="k">Depth*</span><span>ex. 480 mm (RM21); 660 mm (RM22)
+        <div class="depth-bar"><div class="fill" style="width:43.63636363636363%"></div></div>
+        <span class="hint">Bar vs 1100 mm. EIA does not fix depth. Band: short-mid (~450–550 mm)</span>
+      </span></div>
+      <div class="dim-row"><span class="k">Width</span><span>ex. 430 mm chassis</span></div>
+      <div class="dim-row"><span class="k">Bays</span><span>ex. 4 hot-swap</span></div>
+      <div class="dim-row"><span class="k">MB form</span><span>Micro-ATX / Mini-ITX (RM21)</span></div>
+      <div class="dim-row"><span class="k">Notable I/O</span><span>DIY; BMC only if server board fitted</span></div>
+      <div class="dim-row"><span class="k">PSU</span><span>Standard ATX PSU bay typical</span></div>
+      <p>Common first rack metal for TrueNAS/Proxmox in a closet: Micro-ATX, a handful of hot-swap bays, ~480 mm depth. Deeper sibling (RM22) adds bay density.</p>
+      <div class="example"><strong>Examples (illustration only)</strong><div class="ex-item"><strong>Silverstone RM21-304</strong>: 430×88.5×480 mm; 4× hot-swap; mATX/ITX <span class="tier direct">direct</span><br><span class="hint">silverstonetek.com</span></div><div class="ex-item"><strong>Silverstone RM22-312</strong>: 12× hot-swap; 660 mm D (denser sibling) <span class="tier direct">direct</span><br><span class="hint">silverstonetek.com</span></div></div>
+      <p class="hint">*Depth values are example chassis from the dossier, not a class average. Source tier shown per example.</p>
+    </article>
+<article class="dossier" id="class-2u-dense">
+      <h3>Dense 2U / disk shelf</h3>
+      <div class="dim-row"><span class="k">Family</span><span>19-inch rack</span></div>
+      <div class="dim-row"><span class="k">Height</span><span>2U = 88.9 mm <span class="tier direct">direct</span></span></div>
+      <div class="dim-row"><span class="k">Depth*</span><span>ex. 660–863.6 mm (1041 w/ CMA)
+        <div class="depth-bar"><div class="fill" style="width:78.54545454545455%"></div></div>
+        <span class="hint">Bar vs 1100 mm. EIA does not fix depth. Band: full (~860–1050+ mm)</span>
+      </span></div>
+      <div class="dim-row"><span class="k">Width</span><span>ex. 437 mm</span></div>
+      <div class="dim-row"><span class="k">Bays</span><span>ex. 12–24 bays</span></div>
+      <div class="dim-row"><span class="k">MB form</span><span>Server board or JBOD (no host CPU)</span></div>
+      <div class="dim-row"><span class="k">Notable I/O</span><span>IPMI power-control; SAS expanders; host link</span></div>
+      <div class="dim-row"><span class="k">PSU</span><span>Often 1+1 redundant (ex. 1000W Titanium on SC826)</span></div>
+      <p>Storage-first 2U: many hot-swap bays, expander backplanes, dual PSU, IPMI. Depth jumps toward a meter; CMA adds more.</p>
+      <div class="example"><strong>Examples (illustration only)</strong><div class="ex-item"><strong>Supermicro CSE-826 JBOD</strong>: 24×3.5 (12+12); 863.6 mm D; 1041 w/ CMA; IPMI; dual PSU <span class="tier direct">direct</span><br><span class="hint">supermicro.com</span></div><div class="ex-item"><strong>Silverstone RM22-312</strong>: 12-bay DIY; 660 mm D <span class="tier direct">direct</span><br><span class="hint">silverstonetek.com</span></div></div>
+      <p class="hint">*Depth values are example chassis from the dossier, not a class average. Source tier shown per example.</p>
+    </article>
+<article class="dossier" id="class-rack-appliance">
+      <h3>Rackmount appliance NAS</h3>
+      <div class="dim-row"><span class="k">Family</span><span>19-inch rack · appliance OS</span></div>
+      <div class="dim-row"><span class="k">Height</span><span>1U = 44 mm <span class="tier direct">direct</span></span></div>
+      <div class="dim-row"><span class="k">Depth*</span><span>327.5 mm w/ handles (295.5 without)
+        <div class="depth-bar"><div class="fill" style="width:29.772727272727273%"></div></div>
+        <span class="hint">Bar vs 1100 mm. EIA does not fix depth. Band: short (~300–450 mm)</span>
+      </span></div>
+      <div class="dim-row"><span class="k">Width</span><span>478 mm w/ handles (430.5 without)</span></div>
+      <div class="dim-row"><span class="k">Bays</span><span>ex. 4 hot-swap</span></div>
+      <div class="dim-row"><span class="k">MB form</span><span>Vendor locked (not DIY ATX)</span></div>
+      <div class="dim-row"><span class="k">Notable I/O</span><span>Dual 1GbE; optional 10GbE upgrade slot; vendor mgmt (not IPMI)</span></div>
+      <div class="dim-row"><span class="k">PSU</span><span>Internal fixed PSU (ex. 100 W on RS422+)</span></div>
+      <p>Form×role intersection: EIA rack metal + locked appliance OS (DSM/QTS). Not a DIY server board; not a desktop cube. Breaks the false desktop-only NAS model.</p>
+      <div class="example"><strong>Examples (illustration only)</strong><div class="ex-item"><strong>Synology RS422+</strong>: 1U; 4 bay; 44×478×327.5 mm; 28.5 dB(A); 37.93/13.43 W <span class="tier direct">direct</span><br><span class="hint">synology.com RS422+</span></div></div>
+      <p class="hint">*Depth values are example chassis from the dossier, not a class average. Source tier shown per example.</p>
+    </article>
+<article class="dossier" id="class-4u-gpu">
+      <h3>4U GPU / workstation</h3>
+      <div class="dim-row"><span class="k">Family</span><span>19-inch rack</span></div>
+      <div class="dim-row"><span class="k">Height</span><span>4U = 177.8 mm <span class="tier direct">direct</span></span></div>
+      <div class="dim-row"><span class="k">Depth*</span><span>ex. 525 mm
+        <div class="depth-bar"><div class="fill" style="width:47.72727272727273%"></div></div>
+        <span class="hint">Bar vs 1100 mm. EIA does not fix depth. Band: short-mid (~450–550 mm)</span>
+      </span></div>
+      <div class="dim-row"><span class="k">Width</span><span>19 in panel</span></div>
+      <div class="dim-row"><span class="k">Bays</span><span>ex. ~4 bays</span></div>
+      <div class="dim-row"><span class="k">MB form</span><span>ATX / eATX</span></div>
+      <div class="dim-row"><span class="k">Notable I/O</span><span>Many PCIe slots; often IPMI on server boards</span></div>
+      <div class="dim-row"><span class="k">PSU</span><span>High-watt ATX / redundant options by SKU</span></div>
+      <p>Tall rack chassis for dual-slot (or multi) GPUs, full-height cards, and ATX/eATX boards. May also stand as a tower.</p>
+      <div class="example"><strong>Examples (illustration only)</strong><div class="ex-item"><strong>Genesys C452B</strong>: 525 mm D; GPU to ~490 mm; rack/tower/desktop <span class="tier direct">direct</span><br><span class="hint">genesysgroup.com.tw</span></div></div>
+      <p class="hint">*Depth values are example chassis from the dossier, not a class average. Source tier shown per example.</p>
+    </article>
+<article class="dossier" id="class-4u-dense">
+      <h3>4U dense storage</h3>
+      <div class="dim-row"><span class="k">Family</span><span>19-inch rack</span></div>
+      <div class="dim-row"><span class="k">Height</span><span>4U = 176 mm <span class="tier direct">direct</span></span></div>
+      <div class="dim-row"><span class="k">Depth*</span><span>650 mm
+        <div class="depth-bar"><div class="fill" style="width:59.09090909090909%"></div></div>
+        <span class="hint">Bar vs 1100 mm. EIA does not fix depth. Band: standard (~650–700 mm)</span>
+      </span></div>
+      <div class="dim-row"><span class="k">Width</span><span>430 mm</span></div>
+      <div class="dim-row"><span class="k">Bays</span><span>ex. 24 hot-swap</span></div>
+      <div class="dim-row"><span class="k">MB form</span><span>ATX / CEB / EEB</span></div>
+      <div class="dim-row"><span class="k">Notable I/O</span><span>Mini-SAS backplane bundles; DIY host</span></div>
+      <div class="dim-row"><span class="k">PSU</span><span>ATX or mini-redundant per chassis</span></div>
+      <p>Tall dense bay wall (24× 3.5 common). Needs mid-depth cabinet and accepts high static-pressure cooling noise as the cost of stacked drives.</p>
+      <div class="example"><strong>Examples (illustration only)</strong><div class="ex-item"><strong>Norco RPC-4224</strong>: 430×650×176 mm; 24×3.5 hot-swap; ATX/CEB/EEB <span class="tier direct">direct</span><br><span class="hint">Norco RPC-4224 PDF</span></div></div>
+      <p class="hint">*Depth values are example chassis from the dossier, not a class average. Source tier shown per example.</p>
+    </article>
+<article class="dossier" id="class-tower">
+      <h3>Tower / pedestal</h3>
+      <div class="dim-row"><span class="k">Family</span><span>free / pedestal</span></div>
+      <div class="dim-row"><span class="k">Height</span><span>4U = 452 mm <span class="tier direct">direct</span></span></div>
+      <div class="dim-row"><span class="k">Depth*</span><span>ex. 648 mm
+        <div class="depth-bar"><div class="fill" style="width:58.909090909090914%"></div></div>
+        <span class="hint">Bar vs 1100 mm. EIA does not fix depth. Band: standard (~650 mm)</span>
+      </span></div>
+      <div class="dim-row"><span class="k">Width</span><span>ex. 178 mm (pedestal)</span></div>
+      <div class="dim-row"><span class="k">Bays</span><span>ex. mid bay count</span></div>
+      <div class="dim-row"><span class="k">MB form</span><span>ATX / server boards</span></div>
+      <div class="dim-row"><span class="k">Notable I/O</span><span>Varies; conversion kits add rack ears</span></div>
+      <div class="dim-row"><span class="k">PSU</span><span>ATX / redundant by model</span></div>
+      <p>Floor-standing server case; larger fans than 1U. Some 4U chassis convert between pedestal and rack with kits.</p>
+      <div class="example"><strong>Examples (illustration only)</strong><div class="ex-item"><strong>Supermicro CSE-743T</strong>: 7.0×25.5×17.8 in pedestal <span class="tier direct">direct</span><br><span class="hint">manufacturer dims via listings</span></div><div class="ex-item"><strong>Supermicro GS7 kit</strong>: MCP-290-GS706-0N rack conversion <span class="tier direct">direct</span><br><span class="hint">supermicro.com</span></div></div>
+      <p class="hint">*Depth values are example chassis from the dossier, not a class average. Source tier shown per example.</p>
+    </article>
+<article class="dossier" id="class-desktop-diy">
+      <h3>Desktop DIY NAS case</h3>
+      <div class="dim-row"><span class="k">Family</span><span>desktop cube</span></div>
+      <div class="dim-row"><span class="k">Height</span><span>298 mm (not EIA U) <span class="tier direct">direct</span></span></div>
+      <div class="dim-row"><span class="k">Depth*</span><span>ex. 222–389 mm
+        <div class="depth-bar"><div class="fill" style="width:23.81818181818182%"></div></div>
+        <span class="hint">Bar vs 1100 mm. EIA does not fix depth. Band: ultra-short / free</span>
+      </span></div>
+      <div class="dim-row"><span class="k">Width</span><span>ex. 222–344 mm</span></div>
+      <div class="dim-row"><span class="k">Bays</span><span>ex. 5–10× 3.5</span></div>
+      <div class="dim-row"><span class="k">MB form</span><span>ITX / mATX</span></div>
+      <div class="dim-row"><span class="k">Notable I/O</span><span>Consumer MB rear I/O; usually no BMC</span></div>
+      <div class="dim-row"><span class="k">PSU</span><span>SFX / external / ATX by model</span></div>
+      <p>ITX/mATX cubes optimized for many 3.5 in drives in a living space. Metal is not a Synology; OS is yours.</p>
+      <div class="example"><strong>Examples (illustration only)</strong><div class="ex-item"><strong>Jonsbo N2</strong>: 222.5×222.5×224 mm; 5×3.5 + 1×2.5; ITX <span class="tier direct">direct</span><br><span class="hint">jonsbo.com</span></div><div class="ex-item"><strong>Jonsbo N3</strong>: 233×262×298 mm; 8×3.5 + 1×2.5; ITX <span class="tier direct">direct</span><br><span class="hint">jonsbo.com</span></div><div class="ex-item"><strong>Jonsbo N4</strong>: 286×300×228 mm; 6×3.5 + 2×2.5; ITX/mATX <span class="tier direct">direct</span><br><span class="hint">jonsbo.com</span></div><div class="ex-item"><strong>Fractal Node 804</strong>: 344×307×389 mm; up to 10×3.5 <span class="tier direct">direct</span><br><span class="hint">Fractal product sheet</span></div></div>
+      <p class="hint">*Depth values are example chassis from the dossier, not a class average. Source tier shown per example.</p>
+    </article>
+<article class="dossier" id="class-appliance">
+      <h3>Appliance desktop NAS</h3>
+      <div class="dim-row"><span class="k">Family</span><span>desktop appliance</span></div>
+      <div class="dim-row"><span class="k">Height</span><span>166 mm (not EIA U) <span class="tier direct">direct</span></span></div>
+      <div class="dim-row"><span class="k">Depth*</span><span>ex. 136–226.5 mm
+        <div class="depth-bar"><div class="fill" style="width:20.272727272727273%"></div></div>
+        <span class="hint">Bar vs 1100 mm. EIA does not fix depth. Band: ultra-short / free</span>
+      </span></div>
+      <div class="dim-row"><span class="k">Width</span><span>ex. 170–225 mm</span></div>
+      <div class="dim-row"><span class="k">Bays</span><span>ex. 4 bays</span></div>
+      <div class="dim-row"><span class="k">MB form</span><span>Vendor locked</span></div>
+      <div class="dim-row"><span class="k">Notable I/O</span><span>Vendor remote relay; not IPMI</span></div>
+      <div class="dim-row"><span class="k">PSU</span><span>External brick / small internal (model-locked)</span></div>
+      <p>Vendor chassis + locked appliance OS (DSM/QTS/TOS). Same ROLE as DIY NAS; different metal and ops model.</p>
+      <div class="example"><strong>Examples (illustration only)</strong><div class="ex-item"><strong>Synology DS423+</strong>: 166×199×223 mm; 4 bay; 19.8 dB(A); 28.3/8.45 W <span class="tier direct">direct</span><br><span class="hint">Synology datasheet</span></div><div class="ex-item"><strong>QNAP TS-464</strong>: 165×170×226.5 mm; 4 bay; ~40.5 W typical op <span class="tier direct">direct</span><br><span class="hint">qnap.com</span></div><div class="ex-item"><strong>TerraMaster F4-423</strong>: 227×225×136 mm; 4 bay; 27.4 dB(A); 35.2/13.9 W <span class="tier direct">direct</span><br><span class="hint">terra-master.com</span></div></div>
+      <p class="hint">*Depth values are example chassis from the dossier, not a class average. Source tier shown per example.</p>
+    </article>
+<article class="dossier" id="class-10inch">
+      <h3>10-inch mini-rack</h3>
+      <div class="dim-row"><span class="k">Family</span><span>10-inch</span></div>
+      <div class="dim-row"><span class="k">Height</span><span>6U = 266.7 mm <span class="tier direct">direct</span></span></div>
+      <div class="dim-row"><span class="k">Depth*</span><span>often 200–300 mm
+        <div class="depth-bar"><div class="fill" style="width:22.727272727272727%"></div></div>
+        <span class="hint">Bar vs 1100 mm. EIA does not fix depth. Band: ultra-short</span>
+      </span></div>
+      <div class="dim-row"><span class="k">Width</span><span>front ~254 mm; holes ~236.5 mm</span></div>
+      <div class="dim-row"><span class="k">Bays</span><span>no bays (gear rack)</span></div>
+      <div class="dim-row"><span class="k">MB form</span><span>half-width appliances / SBCs</span></div>
+      <div class="dim-row"><span class="k">Notable I/O</span><span>Networking / Pi / half-width switches</span></div>
+      <div class="dim-row"><span class="k">PSU</span><span>Per device</span></div>
+      <p>Half-width community form: same 1U height, ~236.5 mm hole spacing. No EIA-equivalent width standard.</p>
+      <div class="example"><strong>Examples (illustration only)</strong><div class="ex-item"><strong>Geerling mini-rack ecosystem</strong>: 236.525 mm hole spacing; 6–12U common <span class="tier direct">direct</span><br><span class="hint">github.com/geerlingguy/mini-rack</span></div><div class="ex-item"><strong>Logan Marchione v2</strong>: measured 237 mm centers <span class="tier direct">direct</span><br><span class="hint">loganmarchione.com 2025-09-25</span></div></div>
+      <p class="hint">*Depth values are example chassis from the dossier, not a class average. Source tier shown per example.</p>
+    </article>
+<article class="dossier" id="class-minipc">
+      <h3>Mini-PC / NUC-class</h3>
+      <div class="dim-row"><span class="k">Family</span><span>mini-PC</span></div>
+      <div class="dim-row"><span class="k">Height</span><span>54 mm (not EIA U) <span class="tier direct">direct</span></span></div>
+      <div class="dim-row"><span class="k">Depth*</span><span>ex. 117 mm
+        <div class="depth-bar"><div class="fill" style="width:10.181818181818182%"></div></div>
+        <span class="hint">Bar vs 1100 mm. EIA does not fix depth. Band: ultra-short</span>
+      </span></div>
+      <div class="dim-row"><span class="k">Width</span><span>ex. 112 mm</span></div>
+      <div class="dim-row"><span class="k">Bays</span><span>no bays / NUC</span></div>
+      <div class="dim-row"><span class="k">MB form</span><span>Sealed board</span></div>
+      <div class="dim-row"><span class="k">Notable I/O</span><span>Consumer I/O; rare BMC</span></div>
+      <div class="dim-row"><span class="k">PSU</span><span>External brick</span></div>
+      <p>Palm-sized sealed compute. Almost no drive density; excellent for always-on light services.</p>
+      <div class="example"><strong>Examples (illustration only)</strong><div class="ex-item"><strong>Intel NUC 13 Pro</strong>: slim 117×112×37; tall 117×112×54 <span class="tier direct">direct</span><br><span class="hint">Intel NUC13 TPS PDF</span></div></div>
+      <p class="hint">*Depth values are example chassis from the dossier, not a class average. Source tier shown per example.</p>
+    </article>
+<article class="dossier" id="class-open">
+      <h3>Open bench / test frame</h3>
+      <div class="dim-row"><span class="k">Family</span><span>open</span></div>
+      <div class="dim-row"><span class="k">Height</span><span>115 mm (not EIA U) <span class="tier direct">direct</span></span></div>
+      <div class="dim-row"><span class="k">Depth*</span><span>class unknown · ex. 250 mm
+        <div class="depth-bar"><div class="fill" style="width:0%"></div></div>
+        <span class="hint">Bar vs 1100 mm. EIA does not fix depth. Band: unknown (class) / ex. named</span>
+      </span></div>
+      <div class="dim-row"><span class="k">Width</span><span>class unknown · ex. 360 mm</span></div>
+      <div class="dim-row"><span class="k">Bays</span><span>ex. 0–2 (named)</span></div>
+      <div class="dim-row"><span class="k">MB form</span><span>Open standoffs</span></div>
+      <div class="dim-row"><span class="k">Notable I/O</span><span>Fully exposed</span></div>
+      <div class="dim-row"><span class="k">PSU</span><span>Open ATX mount (ex. ≤320 mm horizontal on BC1 V2)</span></div>
+      <p>Exposed frame for bring-up. No single OEM standard dimension for the class; Streacom BC1 V2 is a named illustration only.</p>
+      <div class="example"><strong>Examples (illustration only)</strong><div class="ex-item"><strong>Streacom BC1 V2</strong>: 360×250×8 mm plate; assembled H ~100–115 mm <span class="tier direct">direct</span><br><span class="hint">streacom.com BC1 V2</span></div><div class="ex-item"><strong>Class note</strong>: No EIA-like standard for open benches as a class <span class="tier unknown">unknown</span><br><span class="hint">dossier unknowns</span></div></div>
+      <p class="hint">*Depth values are example chassis from the dossier, not a class average. Source tier shown per example.</p>
+    </article>
       </div>
 
       <div class="depth-legend">
@@ -78,13 +403,13 @@
       <div class="strip-block">
         <h3 class="strip-title">Closet / cabinet fit <span class="tier implied">implied</span></h3>
         <p class="strip-lead">Common enclosure depths vs chassis depth bands. Rails + cable management arm (CMA) need rear budget beyond chassis D (SC826: 863.6 → 1041 mm w/ CMA; Oracle guidance: ≥900 mm clearance behind front plane with CMA, ≥770 mm without; Intel: budget ~112–152 mm for cables).</p>
-        <div class="fit-strip" id="cabinet-fit-strip"></div>
+        <div class="fit-strip"><div class="fit-card"><div class="enc">450 mm</div><div class="lab">Short wall</div><div class="ok"><span class="k">Fits</span> Ultra-short · short 1U · RS422+ · tight on 480 mm</div><div class="no"><span class="k">Needs more</span> Dense 2U / 4U storage / CMA</div></div><div class="fit-card"><div class="enc">600 mm</div><div class="lab">Short–mid wall</div><div class="ok"><span class="k">Fits</span> Short-mid 2U (~480) with thin cable budget</div><div class="no"><span class="k">Needs more</span> SC826 864 · full CMA stacks</div></div><div class="fit-card"><div class="enc">800 mm</div><div class="lab">Mid cabinet</div><div class="ok"><span class="k">Fits</span> RM22 660 · Norco 650 · many 2U DIY</div><div class="no"><span class="k">Needs more</span> SC826+CMA 1041</div></div><div class="fit-card"><div class="enc">1000+ mm</div><div class="lab">Full cabinet</div><div class="ok"><span class="k">Fits</span> Dense shelves · dual PSU · CMA room</div><div class="no"><span class="k">Needs more</span> -</div></div></div>
       </div>
 
       <div class="strip-block">
         <h3 class="strip-title">Common home-lab cabinet U counts <span class="tier direct">direct</span> heights · <span class="tier implied">implied</span> product mix</h3>
         <p class="strip-lead">Mounting height = U × 44.45 mm. Wall/SOHO products commonly sold as 6U / 9U / 12U / 18U; floor towers include 22U and full 42U (1866.9 mm).</p>
-        <div class="cab-u-strip" id="cabinet-u-strip"></div>
+        <div class="cab-u-strip"><div class="cab-u"><div class="u">6U</div><div class="mm">266.7 mm</div><div class="n">wall / SOHO</div></div><div class="cab-u"><div class="u">9U</div><div class="mm">400.05 mm</div><div class="n">wall / SOHO</div></div><div class="cab-u"><div class="u">12U</div><div class="mm">533.4 mm</div><div class="n">wall sweet spot</div></div><div class="cab-u"><div class="u">18U</div><div class="mm">800.1 mm</div><div class="n">wall / small floor</div></div><div class="cab-u"><div class="u">22U</div><div class="mm">977.9 mm</div><div class="n">floor</div></div><div class="cab-u"><div class="u">42U</div><div class="mm">1866.9 mm</div><div class="n">full height</div></div></div>
       </div>
 
       <div class="width-strip">
@@ -107,7 +432,7 @@
     </section>
 
     <!-- PAGE 2 -->
-    <section class="page" id="page-nas" role="tabpanel">
+    <section class="page" id="nas">
       <div class="page-header">
         <div>
           <h2>NAS vs other boxes</h2>
@@ -134,7 +459,7 @@
 
             <div class="rowhead">Desktop appliance</div>
             <div class="cell">
-              <span class="chip" data-hover="<h4>Synology / QNAP-class</h4>Appliance OS on vendor desktop metal. DS423+ 166×199×223 mm; TS-464 165×170×226.5 mm.<div class='src'>Synology; QNAP · documented</div>">DS423+ / TS-464</span>
+              <span class="chip-wrap"><span class="chip">DS423+ / TS-464</span><span class="chip-note">Synology / QNAP-class — Appliance OS on vendor desktop metal. DS423+ 166×199×223 mm; TS-464 165×170×226.5 mm. (Synology; QNAP · documented)</span></span>
             </div>
             <div class="cell"><span class="chip metal">rare / limited</span></div>
             <div class="cell"><span class="chip metal">vendor apps</span></div>
@@ -142,7 +467,7 @@
 
             <div class="rowhead">Desktop DIY case</div>
             <div class="cell">
-              <span class="chip" data-hover="<h4>Jonsbo / Node</h4>DIY case marketed for NAS bay counts; OS is yours.<div class='src'>jonsbo.com; Fractal Node 804 · documented</div>">Jonsbo N3 / Node 804</span>
+              <span class="chip-wrap"><span class="chip">Jonsbo N3 / Node 804</span><span class="chip-note">Jonsbo / Node — DIY case marketed for NAS bay counts; OS is yours. (jonsbo.com; Fractal Node 804 · documented)</span></span>
             </div>
             <div class="cell"><span class="chip metal">light Proxmox</span></div>
             <div class="cell"><span class="chip metal">possible</span></div>
@@ -150,7 +475,7 @@
 
             <div class="rowhead">Rack appliance</div>
             <div class="cell">
-              <span class="chip" data-hover="<h4>Synology RS422+</h4>1U rack metal + DSM. 44×478×327.5 mm; 4 bay; 28.5 dB(A). Form×role intersection.<div class='src'>synology.com RS422+ · documented</div>">RS422+ 1U DSM</span>
+              <span class="chip-wrap"><span class="chip">RS422+ 1U DSM</span><span class="chip-note">Synology RS422+ — 1U rack metal + DSM. 44×478×327.5 mm; 4 bay; 28.5 dB(A). Form×role intersection. (synology.com RS422+ · documented)</span></span>
             </div>
             <div class="cell"><span class="chip metal">light VMs on DSM</span></div>
             <div class="cell"><span class="chip metal">vendor apps</span></div>
@@ -158,7 +483,7 @@
 
             <div class="rowhead">2U rack / shelf</div>
             <div class="cell">
-              <span class="chip" data-hover="<h4>2U as NAS</h4>TrueNAS on RM21-class or SC826-class metal. Still a NAS role.<div class='src'>Silverstone; Supermicro JBOD · documented</div>">TrueNAS on 2U / JBOD</span>
+              <span class="chip-wrap"><span class="chip">TrueNAS on 2U / JBOD</span><span class="chip-note">2U as NAS — TrueNAS on RM21-class or SC826-class metal. Still a NAS role. (Silverstone; Supermicro JBOD · documented)</span></span>
             </div>
             <div class="cell"><span class="chip metal">Proxmox host</span></div>
             <div class="cell"><span class="chip metal">firewall VM</span></div>
@@ -263,11 +588,11 @@
     </section>
 
     <!-- PAGE 3 -->
-    <section class="page" id="page-matrix" role="tabpanel">
+    <section class="page" id="matrix">
       <div class="page-header">
         <div>
           <h2>Specialization matrix</h2>
-          <p class="question">What is each class for? Pin one class; cells highlight ordinal deltas. Secondary line = example depth mm + bay count.</p>
+          <p class="question">What is each class for? Ordinal deltas vs pinned short/mid 2U DIY (static). Secondary line = example depth mm + bay count.</p>
         </div>
         <div class="callout">
           Columns are comparable across classes. Green = higher than pin; rose = lower. Vendor dB(A)/W only where datasheet-stated (appliance rows). Other noise/power stay ordinal or unknown.
@@ -275,10 +600,8 @@
       </div>
 
       <div class="matrix-controls">
-        <label for="pin-select">Pin reference class</label>
-        <select id="pin-select" aria-label="Pin a chassis class"></select>
-        <span class="pill brass">Default pin: short/mid 2U DIY</span>
-        <span style="font-size:0.75rem;color:var(--ink-muted)">Hover a cell for the delta note. Secondary mm/bays are example SKUs, not averages.</span>
+        <span class="pill brass">Reference pin (static): short/mid 2U DIY</span>
+        <span style="font-size:0.75rem;color:var(--ink-muted)">Green cells = higher ordinal than pin; rose = lower. Secondary mm/bays are example SKUs, not averages.</span>
       </div>
 
       <div class="matrix-wrap">
@@ -294,7 +617,19 @@
               <th>Typical home-lab jobs</th>
             </tr>
           </thead>
-          <tbody id="matrix-body"></tbody>
+          <tbody><tr><td class="sticky-col">Short-depth 1U<div class="class-sec">249–399 mm D* · 0–2</div></td><td class="diff-down"><span class="lvl">Low–Mid</span></td><td class="diff-same"><span class="lvl">Mid (SoC/network)</span></td><td class="diff-up"><span class="lvl">High risk (1U fans)</span></td><td class="diff-up"><span class="lvl">Often IPMI</span></td><td class="diff-down"><span class="lvl">Low</span></td><td class=""><span class="lvl">Edge router · firewall · small hypervisor</span></td></tr>
+<tr><td class="sticky-col">Ultra-short 2U Mini-ITX<div class="class-sec">225–227 mm D* · 1 / low</div></td><td class="diff-down"><span class="lvl">Low</span></td><td class="diff-down"><span class="lvl">Low–Mid</span></td><td class="diff-same"><span class="lvl">Mid</span></td><td class="diff-same"><span class="lvl">DIY</span></td><td class="diff-down"><span class="lvl">Low</span></td><td class=""><span class="lvl">Shallow-closet host · SBC rack · tiny appliance</span></td></tr>
+<tr style="outline:2px solid #c48a2a"><td class="sticky-col">Short/mid 2U DIY <span class="pill brass">PIN</span><div class="class-sec">480–660 mm D* · 4–12</div></td><td class=""><span class="lvl">Mid</span></td><td class=""><span class="lvl">Mid</span></td><td class=""><span class="lvl">Mid</span></td><td class=""><span class="lvl">DIY (BMC optional)</span></td><td class=""><span class="lvl">Mid</span></td><td class=""><span class="lvl">TrueNAS starter · Proxmox host · closet file server</span></td></tr>
+<tr><td class="sticky-col">Dense 2U / disk shelf<div class="class-sec">660–864 mm D* · 12–24</div></td><td class="diff-up"><span class="lvl">High</span></td><td class="diff-down"><span class="lvl">Low (shelf) / Mid (server)</span></td><td class="diff-up"><span class="lvl">High (HDDs+fans)</span></td><td class="diff-up"><span class="lvl">IPMI common</span></td><td class=""><span class="lvl">High bays</span></td><td class=""><span class="lvl">Bulk storage · backup target · JBOD behind TrueNAS</span></td></tr>
+<tr><td class="sticky-col">Rackmount appliance NAS<div class="class-sec">295.5–327.5 mm D* · 4</div></td><td class="diff-same"><span class="lvl">Mid for 1U</span></td><td class="diff-down"><span class="lvl">Low–Mid locked</span></td><td class="diff-down"><span class="lvl">Low–Mid (vendor quiet target)</span><div class="num-line">28.5 dB(A) <span class="tier direct">direct</span></div><div class="num-line">37.93 / 13.43 W <span class="tier direct">direct</span></div></td><td class="diff-up"><span class="lvl">Vendor cloud/mgmt</span></td><td class="diff-down"><span class="lvl">Low–Mid model-locked</span></td><td class=""><span class="lvl">SMB rack files · edge backup · small-office DSM</span></td></tr>
+<tr><td class="sticky-col">4U GPU / workstation<div class="class-sec">525 mm D* · ~4</div></td><td class="diff-down"><span class="lvl">Low–Mid</span></td><td class="diff-up"><span class="lvl">High GPU</span></td><td class="diff-up"><span class="lvl">High power; noise varies</span></td><td class="diff-up"><span class="lvl">Often IPMI on server MB</span></td><td class=""><span class="lvl">High PCIe</span></td><td class=""><span class="lvl">Local inference · media encode · lab GPU</span></td></tr>
+<tr><td class="sticky-col">4U dense storage<div class="class-sec">650 mm D* · 24</div></td><td class="diff-up"><span class="lvl">High</span></td><td class="diff-same"><span class="lvl">Mid</span></td><td class="diff-up"><span class="lvl">High (static pressure)</span></td><td class="diff-same"><span class="lvl">DIY / optional BMC</span></td><td class=""><span class="lvl">High bays + PCIe</span></td><td class=""><span class="lvl">Bulk TrueNAS · archive · many-HDD host</span></td></tr>
+<tr><td class="sticky-col">Tower / pedestal<div class="class-sec">648 mm D* · mid</div></td><td class="diff-same"><span class="lvl">Mid</span></td><td class="diff-up"><span class="lvl">Mid–High</span></td><td class="diff-down"><span class="lvl">Better than 1U for shared rooms</span></td><td class=""><span class="lvl">Varies</span></td><td class=""><span class="lvl">High internal</span></td><td class=""><span class="lvl">First server · quieter DIY NAS · office corner host</span></td></tr>
+<tr><td class="sticky-col">Desktop DIY NAS case<div class="class-sec">222–389 mm D* · 5–10×3.5</div></td><td class="diff-up"><span class="lvl">Mid–High for footprint</span></td><td class="diff-down"><span class="lvl">Low–Mid</span></td><td class="diff-down"><span class="lvl">Room-oriented</span></td><td class="diff-down"><span class="lvl">Usually none</span></td><td class="diff-down"><span class="lvl">Limited vs rack</span></td><td class=""><span class="lvl">Quiet TrueNAS · Unraid · living-room files</span></td></tr>
+<tr><td class="sticky-col">Appliance desktop NAS<div class="class-sec">136–223 mm D* · 4</div></td><td class="diff-same"><span class="lvl">Mid for size</span></td><td class="diff-down"><span class="lvl">Low–Mid locked</span></td><td class="diff-down"><span class="lvl">Low (vendor quiet targets)</span><div class="num-line">19.8–27.4 dB(A) ex. <span class="tier direct">direct</span></div><div class="num-line">28.3–40.5 W access ex. <span class="tier direct">direct</span></div></td><td class="diff-up"><span class="lvl">Vendor cloud/mgmt</span></td><td class="diff-down"><span class="lvl">Low–Mid model-locked</span></td><td class=""><span class="lvl">Family files · photos · light Plex · sync</span></td></tr>
+<tr><td class="sticky-col">10-inch mini-rack<div class="class-sec">200–300 mm D* · n/a</div></td><td class="diff-down"><span class="lvl">Low</span></td><td class="diff-down"><span class="lvl">Low–Mid</span></td><td class="diff-down"><span class="lvl">Low–Mid</span></td><td class="diff-down"><span class="lvl">Rare</span></td><td class="diff-down"><span class="lvl">Low</span></td><td class=""><span class="lvl">Homelab networking · Pi clusters · half-width switches</span></td></tr>
+<tr><td class="sticky-col">Mini-PC / NUC-class<div class="class-sec">112–117 mm D* · 0 / NUC</div></td><td class="diff-down"><span class="lvl">Very Low</span></td><td class="diff-down"><span class="lvl">Low–Mid</span></td><td class="diff-down"><span class="lvl">Very Low</span></td><td class="diff-down"><span class="lvl">Rare</span></td><td class="diff-down"><span class="lvl">Very Low</span></td><td class=""><span class="lvl">DNS · DNS-filter · k8s worker · jump host</span></td></tr>
+<tr><td class="sticky-col">Open bench / test frame<div class="class-sec">ex. 250 mm D* · 0–2</div></td><td class=""><span class="lvl">N/A</span></td><td class=""><span class="lvl">N/A</span></td><td class="diff-up"><span class="lvl">High (exposed)</span></td><td class=""><span class="lvl">N/A</span></td><td class="diff-up"><span class="lvl">Max service access</span></td><td class=""><span class="lvl">Bring-up · debugging · thermal experiments</span></td></tr></tbody>
         </table>
       </div>
 
@@ -312,7 +647,7 @@
 
 
     <!-- PAGE 5 · Platforms -->
-    <section class="page" id="page-platforms" role="tabpanel">
+    <section class="page" id="platforms">
       <div class="page-header">
         <div>
           <h2>EPYC platform eras</h2>
@@ -332,8 +667,26 @@
 
       <div class="strip-block">
         <h3 class="strip-title">Annotated timeline · platform plates <span class="tier direct">direct</span> socket/I/O · <span class="tier implied">implied</span> chassis reading</h3>
-        <p class="strip-lead">Each plate is a generation, not a SKU bake-off. Hover a plate for chassis notes. Milan-X is a Milan cache variant on the same SP3 plate.</p>
-        <div class="plat-timeline" id="plat-timeline" aria-label="EPYC generation timeline"></div>
+        <p class="strip-lead">Each plate is a generation, not a SKU bake-off. Chassis notes are printed on each plate. Milan-X is a Milan cache variant on the same SP3 plate. Comparison matrix pinned to Rome (static).</p>
+        <div class="plat-timeline" aria-label="EPYC generation timeline"><div class="plat-plate" data-gen="naples">
+      <div class="era">2017 · EPYC 7001</div>
+      <h4>Naples</h4>
+      <div class="facts"><div><b>Zen</b> Zen 1 · GF 14 nm</div><div><b>Max cores</b> 32 / 64</div><div><b>Memory</b> 8ch DDR4-2666 · ≤2 TB</div><div><b>PCIe</b> 128× 3.0</div><div><b>Package</b> 4× Zeppelin MCM</div></div>
+      <div class="sock">SP3 (LGA 4094)</div>
+      <p class="plat-chassis-note">First SP3 metal; PCIe 3.0 NICs/NVMe era; verify board still gets BIOS love</p>
+    </div><div class="plat-arrow"><span>PLATFORM<br>JUMP<br>PCIe 4 · chiplets</span></div><div class="plat-plate pinned" data-gen="rome">
+      <div class="era">2019 · EPYC 7002</div>
+      <h4>Rome</h4>
+      <div class="facts"><div><b>Zen</b> Zen 2 · 7 nm CCD + 14 nm IOD</div><div><b>Max cores</b> 64 / 128</div><div><b>Memory</b> 8ch DDR4-3200 · ≤4 TB</div><div><b>PCIe</b> 128× 4.0</div><div><b>Package</b> IOD + Zen 2 CCDs</div></div>
+      <div class="sock">SP3 (LGA 4094)</div>
+      <p class="plat-chassis-note">Bigger platform jump on same SP3 cooler/board class; PCIe 4.0 unlocks denser NVMe/NIC</p>
+    </div><div class="plat-arrow"><span>SAME<br>PLATFORM<br>Zen 3 cores</span></div><div class="plat-plate" data-gen="milan">
+      <div class="era">2021 · EPYC 7003</div>
+      <h4>Milan</h4>
+      <div class="facts"><div><b>Zen</b> Zen 3 · 7 nm CCD + 14 nm IOD</div><div><b>Max cores</b> 64 / 128</div><div><b>Memory</b> 8ch DDR4-3200</div><div><b>PCIe</b> 128× 4.0</div><div><b>Package</b> IOD + Zen 3 CCDs</div></div>
+      <div class="sock">SP3 (LGA 4094)</div>
+      <p class="plat-chassis-note">Same SP3 platform plate as Rome; BIOS update path; watch 280 W in 1U</p>
+    </div></div>
         <div class="genoa-note" id="genoa-footnote">
           <span class="tag">WHAT COMES AFTER</span>
           <strong>Genoa · EPYC 9004 · SP5</strong>
@@ -345,15 +698,13 @@
       <div class="page-header" style="margin-top:18px">
         <div>
           <h2 style="font-size:1.15rem">Generation comparison matrix</h2>
-          <p class="question">Pin a reference generation. Cells highlight what differs for chassis buyers.</p>
+          <p class="question">Pinned reference: Rome (7002). Cells highlight what differs for chassis buyers (static deltas).</p>
         </div>
       </div>
 
       <div class="matrix-controls">
-        <label for="plat-pin-select">Pin reference generation</label>
-        <select id="plat-pin-select" aria-label="Pin an EPYC generation"></select>
         <span class="pill brass">Default pin: Rome (7002)</span>
-        <span style="font-size:0.75rem;color:var(--ink-muted)">Hover a cell for delta vs pin + source tier. No invented benchmarks.</span>
+        <span style="font-size:0.75rem;color:var(--ink-muted)">Green = newer/higher vs pin; rose = older/lower. No invented benchmarks.</span>
       </div>
 
       <div class="matrix-wrap">
@@ -366,7 +717,16 @@
               <th data-gen="milan">Milan · 7003</th>
             </tr>
           </thead>
-          <tbody id="plat-matrix-body"></tbody>
+          <tbody><tr><td class="sticky-col dim-label">Codename / series</td><td class="diff-down"><div class="cell-main">Naples · EPYC 7001</div><div class="cell-sub">Launch 2017</div> <span class="tier direct">direct</span></td><td class="" style="outline:2px solid #c48a2a"><div class="cell-main">Rome · EPYC 7002</div><div class="cell-sub">Launch 2019</div> <span class="tier direct">direct</span></td><td class="diff-up"><div class="cell-main">Milan · EPYC 7003</div><div class="cell-sub">Launch 2021</div> <span class="tier direct">direct</span></td></tr>
+<tr><td class="sticky-col dim-label">Zen microarchitecture</td><td class="diff-down"><div class="cell-main">Zen 1</div> <span class="tier direct">direct</span></td><td class="" style="outline:2px solid #c48a2a"><div class="cell-main">Zen 2</div> <span class="tier direct">direct</span></td><td class="diff-up"><div class="cell-main">Zen 3</div> <span class="tier direct">direct</span></td></tr>
+<tr><td class="sticky-col dim-label">Socket</td><td class="diff-same"><div class="cell-main">SP3 (LGA 4094)</div><div class="cell-sub">Same SP3 across all three</div> <span class="tier direct">direct</span></td><td class="" style="outline:2px solid #c48a2a"><div class="cell-main">SP3 (LGA 4094)</div><div class="cell-sub">Same SP3 across all three</div> <span class="tier direct">direct</span></td><td class="diff-same"><div class="cell-main">SP3 (LGA 4094)</div><div class="cell-sub">Same SP3 across all three</div> <span class="tier direct">direct</span></td></tr>
+<tr><td class="sticky-col dim-label">Memory channels / DDR</td><td class="diff-down"><div class="cell-main">8ch DDR4-2666 · ≤2 TB/socket</div><div class="cell-sub">8ch DDR4-2666</div> <span class="tier direct">direct</span></td><td class="" style="outline:2px solid #c48a2a"><div class="cell-main">8ch DDR4-3200 · ≤4 TB/socket</div><div class="cell-sub">8ch DDR4-3200</div> <span class="tier direct">direct</span></td><td class="diff-same"><div class="cell-main">8ch DDR4-3200 · SP3 DDR4 class</div><div class="cell-sub">8ch DDR4-3200</div> <span class="tier direct">direct</span></td></tr>
+<tr><td class="sticky-col dim-label">PCIe</td><td class="diff-down"><div class="cell-main">128× PCIe 3.0</div><div class="cell-sub">128 lanes/socket; 2P spends 64 on IF</div> <span class="tier direct">direct</span></td><td class="" style="outline:2px solid #c48a2a"><div class="cell-main">128× PCIe 4.0</div><div class="cell-sub">128 lanes/socket; 2P spends 64 on IF</div> <span class="tier direct">direct</span></td><td class="diff-same"><div class="cell-main">128× PCIe 4.0</div><div class="cell-sub">128 lanes/socket; 2P spends 64 on IF</div> <span class="tier direct">direct</span></td></tr>
+<tr><td class="sticky-col dim-label">Chiplet / package</td><td class="diff-down"><div class="cell-main">4× Zeppelin MCM</div> <span class="tier direct">direct</span></td><td class="" style="outline:2px solid #c48a2a"><div class="cell-main">IOD + up to 8× Zen 2 CCDs</div> <span class="tier direct">direct</span></td><td class="diff-up"><div class="cell-main">IOD + up to 8× Zen 3 CCDs</div> <span class="tier direct">direct</span></td></tr>
+<tr><td class="sticky-col dim-label">TDP (line + examples)</td><td class="diff-down"><div class="cell-main">~120-180 W (most SKUs)</div><div class="cell-sub">line table 120-180 W</div> <span class="tier direct">direct</span></td><td class="" style="outline:2px solid #c48a2a"><div class="cell-main">~120-225 W common</div><div class="cell-sub">7302P 155 W · 7402P 180 W</div> <span class="tier direct">direct</span></td><td class="diff-up"><div class="cell-main">~120-280 W (datasheet)</div><div class="cell-sub">7443P 200 W · 75F3 280 W</div> <span class="tier direct">direct</span></td></tr>
+<tr><td class="sticky-col dim-label">Dual-socket (2P)</td><td class="diff-same"><div class="cell-main">2P (non-P SKUs); P = 1P only</div><div class="cell-sub">P-suffix = 1P only</div> <span class="tier direct">direct</span></td><td class="" style="outline:2px solid #c48a2a"><div class="cell-main">2P (non-P SKUs); P = 1P only</div><div class="cell-sub">P-suffix = 1P only</div> <span class="tier direct">direct</span></td><td class="diff-same"><div class="cell-main">2P (non-P SKUs); P = 1P only</div><div class="cell-sub">P-suffix = 1P only</div> <span class="tier direct">direct</span></td></tr>
+<tr><td class="sticky-col dim-label">IO die / Infinity Fabric / NUMA</td><td class="diff-up"><div class="cell-main">Multi-die locality; PCIe/mem historically die-tied</div><div class="cell-sub">Tier: implied</div> <span class="tier implied">implied</span></td><td class="" style="outline:2px solid #c48a2a"><div class="cell-main">Central IOD; CCDs via Infinity Fabric; 2P uses 64 lanes for IF</div><div class="cell-sub">Tier: direct</div> <span class="tier direct">direct</span></td><td class="diff-same"><div class="cell-main">Same IOD story; Zen 3 CCD/cache; homelab latency usually CPU not board</div><div class="cell-sub">Tier: implied</div> <span class="tier implied">implied</span></td></tr>
+<tr><td class="sticky-col dim-label">Chassis implications</td><td class="diff-up"><div class="cell-main">First SP3 metal; PCIe 3.0 NICs/NVMe era; verify board still gets BIOS love</div><div class="cell-sub">Cooler/board/BIOS/noise</div> <span class="tier implied">implied</span></td><td class="" style="outline:2px solid #c48a2a"><div class="cell-main">Bigger platform jump on same SP3 cooler/board class; PCIe 4.0 unlocks denser NVMe/NIC</div><div class="cell-sub">Cooler/board/BIOS/noise</div> <span class="tier implied">implied</span></td><td class="diff-same"><div class="cell-main">Same SP3 platform plate as Rome; BIOS update path; watch 280 W in 1U</div><div class="cell-sub">Cooler/board/BIOS/noise</div> <span class="tier implied">implied</span></td></tr></tbody>
         </table>
       </div>
 
@@ -501,7 +861,7 @@
     </section>
 
     <!-- PAGE 4 -->
-    <section class="page" id="page-sources" role="tabpanel">
+    <section class="page" id="sources">
       <div class="page-header">
         <div>
           <h2>Sources &amp; methodology</h2>
@@ -759,8 +1119,5 @@
       <span>No em dashes were harmed in this field guide</span>
     </footer>
   </div>
-
-  <div class="hover-panel" id="hover-panel" role="tooltip"></div>
-  <script src="js/atlas.js"></script>
 </body>
 </html>
